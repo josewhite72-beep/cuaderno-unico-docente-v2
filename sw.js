@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cuaderno-docente-v3';
+const CACHE_NAME = 'cuaderno-docente-v4';
 const urlsToCache = [
   '/',
   '/index.html',
