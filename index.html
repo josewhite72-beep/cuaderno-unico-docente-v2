@@ -1,0 +1,4099 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuaderno Único Docente 2026</title>
+  <link rel="manifest" href="./manifest.json">
+  
+  <!-- iOS Support -->
+  <link rel="apple-touch-icon" href="./icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="./icon-512x512.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Cuaderno Único">
+  <meta name="theme-color" content="#2E7D32">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512x512.png">
+  <link href="https://fonts.googleapis.com/css2?family=Brush+Script+MT&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="./css/styles.css">
+  
+  <!-- Chart.js para Dashboard -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- ==================== HEADER EDITABLE ==================== -->
+  <header id="mainHeader">
+    <h1 class="titulo-principal" contenteditable="true" id="tituloCuaderno" onblur="guardarDato('titulo', this.innerText)">Cuaderno Único Docente</h1>
+    
+    <div class="anio-caja">
+      <h2 contenteditable="true" id="anioEscolar" onblur="guardarDato('anio', this.innerText)">2026</h2>
+    </div>
+    
+    <!-- BÚSQUEDA GLOBAL -->
+    <div class="busqueda-container">
+      <span class="busqueda-icono">🔍</span>
+      <input type="text" 
+             id="busquedaGlobal" 
+             class="busqueda-input" 
+             placeholder="Buscar en todo el cuaderno..."
+             autocomplete="off">
+    </div>
+    
+    <p class="label-header">Docente:</p>
+    <p class="campo-editable" contenteditable="true" id="nombreDocente" onblur="guardarDato('docente', this.innerText)">José R. White</p>
+    
+    <p class="label-header">Centro Educativo:</p>
+    <p class="campo-editable" contenteditable="true" id="nombreEscuela" onblur="guardarDato('escuela', this.innerText)">..........................................................</p>
+    
+    <p class="label-header">Grado:</p>
+    <p class="campo-editable" contenteditable="true" id="gradoEscolar" onblur="guardarDato('grado', this.innerText)">........................................</p>
+  </header>
+
+  <!-- ==================== NAVEGACIÓN (Oculta inicialmente) ==================== -->
+  <nav id="mainNav">
+    <button class="btn-inicio" onclick="mostrarSeccion('bienvenida', this)">🏠 Inicio</button>
+    <button class="btn-dashboard" onclick="mostrarSeccion('dashboard', this)">📊 Dashboard</button>
+    <button class="btn-calendario" onclick="mostrarSeccion('calendario', this)">📅 Calendario</button>
+    <button class="btn-estudiantes" onclick="mostrarSeccion('estudiantes', this)">👥 Estudiantes</button>
+    <button class="btn-asistencia" onclick="mostrarSeccion('asistencia', this)">📋 Asistencia</button>
+    <button class="btn-reuniones" onclick="mostrarSeccion('reuniones', this)">🤝 Reuniones</button>
+    <button class="btn-comisiones" onclick="mostrarSeccion('comisiones', this)">👥 Comisiones</button>
+    <button class="btn-visitas" onclick="mostrarSeccion('visitas', this)">🚗 Visitas</button>
+    <button class="btn-permisos" onclick="mostrarSeccion('permisos', this)">📝 Permisos</button>
+    <button class="btn-circulares" onclick="mostrarSeccion('circulares', this)">📄 Circulares</button>
+    <button class="btn-actividades" onclick="mostrarSeccion('actividades', this)">💰 Act. Económicas</button>
+    <button class="btn-inventario" onclick="mostrarSeccion('inventario', this)">📦 Inventario</button>
+    <button class="btn-estadisticas" onclick="mostrarSeccion('estadisticas', this)">📊 Estadísticas</button>
+    <button class="btn-asuntos" onclick="mostrarSeccion('asuntos', this)">📋 Asuntos Varios</button>
+    <button class="btn-backup" onclick="mostrarSeccion('backup', this)">💾 Backup</button>
+    <button class="btn-horario" onclick="mostrarSeccion('horario', this)">🕐 Horario</button>
+    <button class="btn-pdf" onclick="mostrarSelectorPDF()">📄 Exportar PDF</button>
+  </nav>
+
+  <main>
+    <!-- ==================== PANTALLA 1: PORTADA ==================== -->
+<section id="portada" class="active">
+  <!-- ÍCONO GRANDE ARRIBA -->
+  <div class="icono-portada">
+    <img src="./icon-512x512.png" alt="Cuaderno Único Docente">
+  </div>
+  
+  <!-- LÍNEA DIVISORIA -->
+  <div class="divisor-portada"></div>
+  
+  <!-- INFORMACIÓN ABAJO -->
+  <div class="info-portada">
+    <h1 class="titulo-principal" contenteditable="true" id="tituloPortada" onblur="guardarDato('titulo', this.innerText)">Cuaderno Único Docente</h1>
+    
+    <div class="anio-caja">
+      <h2 contenteditable="true" id="anioPortada" onblur="guardarDato('anio', this.innerText)">2026</h2>
+    </div>
+    
+    <p class="label-header">Docente:</p>
+    <p class="campo-editable" contenteditable="true" id="docentePortada" onblur="guardarDato('docente', this.innerText)">José R. White</p>
+    
+    <p class="label-header">Centro Educativo:</p>
+    <p class="campo-editable" contenteditable="true" id="escuelaPortada" onblur="guardarDato('escuela', this.innerText)">..........................................................</p>
+    
+    <p class="label-header">Grado:</p>
+    <p class="campo-editable" contenteditable="true" id="gradoPortada" onblur="guardarDato('grado', this.innerText)">........................................</p>
+    
+    <button class="btn-inicio-grande" onclick="irABienvenida()">
+      🚀 INICIAR
+    </button>
+  </div>
+</section>
+ 
+    <!-- ==================== PANTALLA 2: BIENVENIDA ==================== -->
+    <section id="bienvenida">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="regresarAPortada()">← Portada</button></div>
+      <div class="section-title">📚 Bienvenido al Cuaderno Único Docente</div>
+      
+      <div class="card">
+        <h3>✏️ Datos Editables</h3>
+        <p>Haz <strong>clic en cualquier texto</strong> en la parte superior para editar:</p>
+        <ul>
+          <li>📝 Nombre del docente</li>
+          <li>🏫 Centro educativo</li>
+          <li>🎓 Grado asignado</li>
+          <li>📅 Año escolar</li>
+          <li>📖 Título del cuaderno</li>
+        </ul>
+        <p>Los cambios se guardan automáticamente.</p>
+      </div>
+      
+      <div class="card">
+        <h3>💾 Copia de Seguridad</h3>
+        <p>Ve a la sección <strong>Backup</strong> para:</p>
+        <ul>
+          <li>📥 Exportar todos tus datos a un archivo</li>
+          <li>📤 Restaurar desde un archivo anterior</li>
+          <li>📋 Copiar datos al portapapeles para compartir</li>
+        </ul>
+        <button class="btn btn-backup" onclick="mostrarSeccion('backup')">Ir a Backup</button>
+      </div>
+      
+      <div class="card">
+        <h3>👥 Gestión por Grados</h3>
+        <p>Como docente de inglés, puedes administrar <strong>8 grados</strong>:</p>
+        <p style="font-size: 1.2rem; color: #764ba2; font-weight: bold;">Pre-K | Kinder | 1° | 2° | 3° | 4° | 5° | 6°</p>
+      </div>
+      
+      <div class="card">
+        <h3>📅 Calendario Escolar 2026</h3>
+        <p><strong>📋 Organización docente:</strong> 23-27 de febrero</p>
+        <p><strong>🎒 Inicio de clases:</strong> 2 de marzo</p>
+        <p><strong>🏖️ Recesos:</strong> 1-5 de junio | 7-11 de septiembre</p>
+        <p><strong>🎓 Fin de clases:</strong> 11 de diciembre</p>
+      </div>
+
+      <button class="btn-funcionalidades" onclick="irAFuncionalidades()">
+        ⚡ Ir a Funcionalidades
+      </button>
+    </section>
+
+    <!-- ==================== DASHBOARD CENTRAL - FASE 3 ==================== -->
+    <section id="dashboard">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irABienvenida()">← Inicio</button></div>
+      <div class="section-title">📊 Dashboard Central</div>
+      
+      <!-- 1. KPI CARDS - Resumen Rápido -->
+      <div class="dashboard-kpis">
+        <div class="kpi-card">
+          <div class="kpi-icon">👥</div>
+          <div class="kpi-numero" id="kpiEstudiantes">0</div>
+          <div class="kpi-label">Estudiantes Totales</div>
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-icon">✅</div>
+          <div class="kpi-numero" id="kpiAsistenciaHoy">--%</div>
+          <div class="kpi-label">Asistencia Hoy</div>
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-icon">📅</div>
+          <div class="kpi-numero" id="kpiEventosProximos">0</div>
+          <div class="kpi-label">Eventos Próximos (7 días)</div>
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-icon">💰</div>
+          <div class="kpi-numero" id="kpiBalance">$0</div>
+          <div class="kpi-label">Balance Total</div>
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-icon">🤝</div>
+          <div class="kpi-numero" id="kpiReuniones">0</div>
+          <div class="kpi-label">Reuniones Este Mes</div>
+        </div>
+        
+        <div class="kpi-card" id="kpiMaterialesBajos">
+          <div class="kpi-icon">⚠️</div>
+          <div class="kpi-numero">0</div>
+          <div class="kpi-label">Materiales Stock Bajo</div>
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-icon">📌</div>
+          <div class="kpi-numero" id="kpiAsuntos">0</div>
+          <div class="kpi-label">Asuntos Pendientes</div>
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-icon">📄</div>
+          <div class="kpi-numero" id="kpiCirculares">0</div>
+          <div class="kpi-label">Circulares Este Mes</div>
+        </div>
+      </div>
+      
+      <!-- 2. GRÁFICO DE ASISTENCIA -->
+      <div class="dashboard-chart">
+        <h3>📊 Asistencia - Últimos 30 Días</h3>
+        <canvas id="chartAsistencia"></canvas>
+      </div>
+      
+      <!-- 3. PRÓXIMOS EVENTOS -->
+      <div class="dashboard-proximos-eventos">
+        <h3>📅 Próximos Eventos</h3>
+        <div id="listaProximosEventosDashboard"></div>
+        <button class="btn-ver-todos" onclick="mostrarSeccion('calendario', this)">
+          Ver todos los eventos →
+        </button>
+      </div>
+      
+      <!-- 4. BALANCE ECONÓMICO -->
+      <div class="dashboard-balance">
+        <h3>💰 Balance Económico</h3>
+        
+        <div class="balance-resumen">
+          <div class="balance-item ingresos">
+            <div class="balance-icono">📈</div>
+            <div class="balance-info">
+              <div class="balance-label">Ingresos Totales</div>
+              <div class="balance-monto" id="balanceIngresos">$0.00</div>
+            </div>
+          </div>
+          
+          <div class="balance-item egresos">
+            <div class="balance-icono">📉</div>
+            <div class="balance-info">
+              <div class="balance-label">Egresos Totales</div>
+              <div class="balance-monto" id="balanceEgresos">$0.00</div>
+            </div>
+          </div>
+          
+          <div class="balance-item balance-final" id="balanceFinalCard">
+            <div class="balance-icono">💵</div>
+            <div class="balance-info">
+              <div class="balance-label">Balance Final</div>
+              <div class="balance-monto" id="balanceFinal">$0.00</div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn-ver-todos" onclick="mostrarSeccion('actividades', this)">
+          Ver todas las actividades →
+        </button>
+      </div>
+      
+      <!-- 5. ACCIONES RÁPIDAS -->
+      <div class="dashboard-acciones">
+        <h3>⚡ Acciones Rápidas</h3>
+        
+        <div class="acciones-grid">
+          <button class="accion-btn" onclick="mostrarSeccion('asistencia', this)">
+            <span class="accion-icono">✅</span>
+            <span class="accion-texto">Tomar Asistencia</span>
+          </button>
+          
+          <button class="accion-btn" onclick="mostrarSeccion('calendario', this)">
+            <span class="accion-icono">📅</span>
+            <span class="accion-texto">Agregar Evento</span>
+          </button>
+          
+          <button class="accion-btn" onclick="mostrarSeccion('reuniones', this)">
+            <span class="accion-icono">🤝</span>
+            <span class="accion-texto">Nueva Reunión</span>
+          </button>
+          
+          <button class="accion-btn" onclick="mostrarSeccion('actividades', this)">
+            <span class="accion-icono">💰</span>
+            <span class="accion-texto">Registrar Actividad</span>
+          </button>
+          
+          <button class="accion-btn" onclick="mostrarSeccion('asuntos', this)">
+            <span class="accion-icono">📌</span>
+            <span class="accion-texto">Nuevo Asunto</span>
+          </button>
+          
+          <button class="accion-btn" onclick="exportarBackup()">
+            <span class="accion-icono">💾</span>
+            <span class="accion-texto">Backup Completo</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PANTALLA 3: FUNCIONALIDADES (GRID BOTONES) ==================== -->
+    <section id="funcionalidades">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irABienvenida()">← Inicio</button></div>
+      <div class="section-title" style="color: white; background: rgba(255,255,255,0.2);">🛠️ Panel de Funcionalidades</div>
+      
+      <div class="grid-funcionalidades">
+        <button class="btn-funcion btn-inicio" onclick="mostrarSeccion('bienvenida')">
+          🏠 Inicio
+        </button>
+        <button class="btn-funcion btn-calendario" onclick="mostrarSeccion('calendario')">
+          📅 Calendario
+        </button>
+        <button class="btn-funcion btn-estudiantes" onclick="mostrarSeccion('estudiantes')">
+          👥 Estudiantes
+        </button>
+        <button class="btn-funcion btn-asistencia" onclick="mostrarSeccion('asistencia')">
+          📋 Asistencia
+        </button>
+        <button class="btn-funcion btn-reuniones" onclick="mostrarSeccion('reuniones')">
+          🤝 Reuniones
+        </button>
+        <button class="btn-funcion btn-comisiones" onclick="mostrarSeccion('comisiones')">
+          👥 Comisiones
+        </button>
+        <button class="btn-funcion btn-visitas" onclick="mostrarSeccion('visitas')">
+          🚗 Visitas
+        </button>
+        <button class="btn-funcion btn-permisos" onclick="mostrarSeccion('permisos')">
+          📝 Permisos
+        </button>
+        <button class="btn-funcion btn-circulares" onclick="mostrarSeccion('circulares')">
+          📄 Circulares
+        </button>
+        <button class="btn-funcion btn-actividades" onclick="mostrarSeccion('actividades')">
+          💰 Act. Económicas
+        </button>
+        <button class="btn-funcion btn-inventario" onclick="mostrarSeccion('inventario')">
+          📦 Inventario
+        </button>
+        <button class="btn-funcion btn-estadisticas" onclick="mostrarSeccion('estadisticas')">
+          📊 Estadísticas
+        </button>
+        <button class="btn-funcion btn-asuntos" onclick="mostrarSeccion('asuntos')">
+          📋 Asuntos Varios
+        </button>
+        <button class="btn-funcion btn-backup" onclick="mostrarSeccion('backup')">
+          💾 Backup
+        </button>
+        <button class="btn-funcion btn-horario" onclick="mostrarSeccion('horario')">
+          🕐 Horario
+        </button>
+        <button class="btn-funcion btn-pdf" onclick="mostrarSelectorPDF()">
+          📄 Exportar PDF
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ==================== SECCIÓN CALENDARIO ==================== -->
+    <section id="calendario">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">📅 Calendario-Agenda 2026</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarEventosExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-pdf" onclick="exportarSeccionPDF('eventos', 'Calendario de Eventos')">
+          📑 Exportar a PDF
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('eventos', 'Eventos')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <p style="color: #666; margin-bottom: 1rem;"><em>Haz clic en cualquier día para agregar eventos</em></p>
+        <div class="calendario-anual" id="calendarioContainer"></div>
+      </div>
+      <div class="card">
+        <h3>📋 Próximos Eventos</h3>
+        <div id="listaEventosProximos"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN ESTUDIANTES - SELECTOR DE GRADOS -->
+    <section id="estudiantes">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div id="selectorGrados">
+        <div class="section-title">👥 Selecciona un Grado</div>
+        <div class="grados-grid">
+          <div class="grado-card" onclick="seleccionarGrado('prek')">
+            <h3>🧸 Pre-K</h3>
+            <p id="count-prek">0 estudiantes</p>
+          </div>
+          <div class="grado-card" onclick="seleccionarGrado('kinder')">
+            <h3>🎨 Kinder</h3>
+            <p id="count-kinder">0 estudiantes</p>
+          </div>
+          <div class="grado-card" onclick="seleccionarGrado('1grado')">
+            <h3>1️⃣ 1° Grado</h3>
+            <p id="count-1grado">0 estudiantes</p>
+          </div>
+          <div class="grado-card" onclick="seleccionarGrado('2grado')">
+            <h3>2️⃣ 2° Grado</h3>
+            <p id="count-2grado">0 estudiantes</p>
+          </div>
+          <div class="grado-card" onclick="seleccionarGrado('3grado')">
+            <h3>3️⃣ 3° Grado</h3>
+            <p id="count-3grado">0 estudiantes</p>
+          </div>
+          <div class="grado-card" onclick="seleccionarGrado('4grado')">
+            <h3>4️⃣ 4° Grado</h3>
+            <p id="count-4grado">0 estudiantes</p>
+          </div>
+          <div class="grado-card" onclick="seleccionarGrado('5grado')">
+            <h3>5️⃣ 5° Grado</h3>
+            <p id="count-5grado">0 estudiantes</p>
+          </div>
+          <div class="grado-card" onclick="seleccionarGrado('6grado')">
+            <h3>6️⃣ 6° Grado</h3>
+            <p id="count-6grado">0 estudiantes</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISTA DE GRADO ESPECÍFICO -->
+      <div id="vistaGrado" class="hidden">
+        <div class="section-title" id="tituloGrado">👥 Estudiantes</div>
+        
+        <button class="btn volver-btn" onclick="volverAGrados()">← Volver a Grados</button>
+        
+        <!-- IMPORTAR CSV -->
+        <div class="card">
+          <h3>📥 Importar Estudiantes desde CSV</h3>
+          <div class="import-area" id="dropZone">
+            <p style="font-size: 3rem;">📄</p>
+            <p>Arrastra un archivo CSV aquí o haz clic para seleccionar</p>
+            <input type="file" id="csvFileInput" accept=".csv" style="display: none;" onchange="procesarCSV(this.files[0])">
+            <button class="btn btn-info" onclick="document.getElementById('csvFileInput').click()">Seleccionar Archivo</button>
+          </div>
+          <p style="color: #666; font-size: 0.9rem;">
+            <strong>Formato CSV:</strong> nombre,cedula,fecha_nac,telefono,email,direccion,observaciones<br>
+            <em>La primera fila debe ser el encabezado</em>
+          </p>
+        </div>
+
+        <!-- AGREGAR MANUAL -->
+        <div class="card">
+          <h3>➕ Agregar Estudiante Manual</h3>
+          <div class="form-group">
+            <label>Nombre completo:</label>
+            <input type="text" id="nombreEstudiante" placeholder="Apellidos, Nombres">
+          </div>
+          <div class="form-group">
+            <label>Cédula/Pasaporte:</label>
+            <input type="text" id="cedulaEstudiante" placeholder="X-XXX-XXXX">
+          </div>
+          <div class="form-group">
+            <label>Fecha de nacimiento:</label>
+            <input type="date" id="fechaNacimiento">
+          </div>
+          <div class="form-group">
+            <label>Teléfono:</label>
+            <input type="tel" id="telefonoPadre" placeholder="6XXX-XXXX">
+          </div>
+          <div class="form-group">
+            <label>Correo:</label>
+            <input type="email" id="emailPadre" placeholder="correo@ejemplo.com">
+          </div>
+          <div class="form-group">
+            <label>Dirección:</label>
+            <textarea id="direccion" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Observaciones:</label>
+            <textarea id="observaciones" rows="2"></textarea>
+          </div>
+          <button class="btn btn-success" onclick="agregarEstudiante()">➕ Agregar Estudiante</button>
+        </div>
+
+        <!-- EXPORTAR SELECCIONADOS -->
+        <div class="card">
+          <h3>📤 Exportar Estudiantes</h3>
+          <button class="btn btn-info" onclick="seleccionarTodos()">✓ Seleccionar Todos</button>
+          <button class="btn btn-warning" onclick="deseleccionarTodos()">✗ Deseleccionar Todos</button>
+          <button class="btn btn-success" onclick="exportarSeleccionadosCSV()">📄 Exportar Seleccionados a CSV</button>
+        </div>
+
+        <!-- LISTA DE ESTUDIANTES -->
+        <div class="card">
+          <h3>📋 Listado de Estudiantes</h3>
+          <table>
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="checkAll" onchange="toggleTodos(this)"></th>
+                <th>Nombre</th>
+                <th>Cédula</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaEstudiantes"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN ASISTENCIA -->
+    <section id="asistencia">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">📋 Control de Asistencia</div>
+      
+      <div class="card">
+        <div class="form-group">
+          <label>Seleccionar Grado:</label>
+          <select id="gradoAsistencia" onchange="cargarAsistencia()">
+            <option value="">-- Selecciona un grado --</option>
+            <option value="prek">Pre-K</option>
+            <option value="kinder">Kinder</option>
+            <option value="1grado">1° Grado</option>
+            <option value="2grado">2° Grado</option>
+            <option value="3grado">3° Grado</option>
+            <option value="4grado">4° Grado</option>
+            <option value="5grado">5° Grado</option>
+            <option value="6grado">6° Grado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fecha:</label>
+          <input type="date" id="fechaAsistencia" onchange="cargarAsistencia()">
+        </div>
+      </div>
+
+      <div id="panelAsistencia" class="hidden">
+        <div class="card">
+          <h3>Lista de Asistencia</h3>
+          <div class="asistencia-grid" id="listaAsistencia"></div>
+          <button class="btn btn-success" onclick="guardarAsistencia()" style="margin-top: 1rem;">💾 Guardar Asistencia</button>
+          <button class="btn btn-info" onclick="mostrarHistorialAsistencia()" style="margin-top: 1rem; width: 100%;">📋 Ver Historial Completo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN REUNIONES -->
+    <section id="reuniones">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">🤝 Reuniones</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarReunionesExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('reuniones', 'Reuniones')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <h3>➕ Nueva Reunión</h3>
+        <div class="form-group">
+          <label>Fecha:</label>
+          <input type="date" id="fechaReunion">
+        </div>
+        <div class="form-group">
+          <label>Tema:</label>
+          <input type="text" id="temaReunion" placeholder="Tema de la reunión">
+        </div>
+        <div class="form-group">
+          <label>Participantes:</label>
+          <input type="text" id="participantesReunion" placeholder="Nombres de los participantes">
+        </div>
+        <div class="form-group">
+          <label>Acuerdos/Compromisos:</label>
+          <textarea id="acuerdosReunion" rows="4"></textarea>
+        </div>
+        <button class="btn btn-success" onclick="agregarReunion()">➕ Agregar Reunión</button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Historial de Reuniones</h3>
+        <div id="listaReuniones"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN COMISIONES -->
+    <section id="comisiones">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">👥 Comisiones de Trabajo</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarComisionesExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('comisiones', 'Comisiones')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <h3>➕ Nueva Comisión</h3>
+        <div class="form-group">
+          <label>Nombre de la Comisión:</label>
+          <input type="text" id="nombreComision" placeholder="Ej: Comisión de Cultura">
+        </div>
+        <div class="form-group">
+          <label>Integrantes:</label>
+          <textarea id="integrantesComision" rows="3" placeholder="Nombres de los integrantes"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Funciones:</label>
+          <textarea id="funcionesComision" rows="3"></textarea>
+        </div>
+        <button class="btn btn-success" onclick="agregarComision()">➕ Agregar Comisión</button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Comisiones Activas</h3>
+        <div id="listaComisiones"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN VISITAS -->
+    <section id="visitas">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">🚗 Visitas y Salidas</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarVisitasExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('visitas', 'Visitas')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <h3>➕ Registrar Visita/Salida</h3>
+        <div class="form-group">
+          <label>Fecha:</label>
+          <input type="date" id="fechaVisita">
+        </div>
+        <div class="form-group">
+          <label>Lugar:</label>
+          <input type="text" id="lugarVisita" placeholder="Destino de la visita">
+        </div>
+        <div class="form-group">
+          <label>Grado(s):</label>
+          <input type="text" id="gradoVisita" placeholder="Ej: 3° y 4° grado">
+        </div>
+        <div class="form-group">
+          <label>Cantidad de Estudiantes:</label>
+          <input type="number" id="cantidadVisita" min="1">
+        </div>
+        <div class="form-group">
+          <label>Docentes Responsables:</label>
+          <input type="text" id="responsablesVisita">
+        </div>
+        <div class="form-group">
+          <label>Observaciones:</label>
+          <textarea id="observacionesVisita" rows="3"></textarea>
+        </div>
+        <button class="btn btn-success" onclick="agregarVisita()">➕ Registrar Visita</button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Registro de Visitas</h3>
+        <div id="listaVisitas"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PERMISOS -->
+    <section id="permisos">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">📝 Permisos y Justificativos</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarPermisosExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('permisos', 'Permisos')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <h3>➕ Nuevo Permiso</h3>
+        <div class="form-group">
+          <label>Tipo:</label>
+          <select id="tipoPermiso">
+            <option value="personal">Permiso Personal</option>
+            <option value="enfermedad">Permiso por Enfermedad</option>
+            <option value="capacitacion">Capacitación</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fecha Inicio:</label>
+          <input type="date" id="fechaInicioPermiso">
+        </div>
+        <div class="form-group">
+          <label>Fecha Fin:</label>
+          <input type="date" id="fechaFinPermiso">
+        </div>
+        <div class="form-group">
+          <label>Motivo:</label>
+          <textarea id="motivoPermiso" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Observaciones:</label>
+          <textarea id="obsPermiso" rows="2"></textarea>
+        </div>
+        <button class="btn btn-success" onclick="agregarPermiso()">➕ Agregar Permiso</button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Historial de Permisos</h3>
+        <div id="listaPermisos"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CIRCULARES -->
+    <section id="circulares">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">📄 Circulares y Comunicados</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarCircularesExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('circulares', 'Circulares')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <h3>➕ Nueva Circular</h3>
+        <div class="form-group">
+          <label>Fecha:</label>
+          <input type="date" id="fechaCircular">
+        </div>
+        <div class="form-group">
+          <label>Número/Referencia:</label>
+          <input type="text" id="numeroCircular" placeholder="Ej: C-2026-001">
+        </div>
+        <div class="form-group">
+          <label>Asunto:</label>
+          <input type="text" id="asuntoCircular" placeholder="Asunto de la circular">
+        </div>
+        <div class="form-group">
+          <label>Destinatarios:</label>
+          <input type="text" id="destinatariosCircular" placeholder="Ej: Padres de familia, Docentes">
+        </div>
+        <div class="form-group">
+          <label>Contenido:</label>
+          <textarea id="contenidoCircular" rows="5"></textarea>
+        </div>
+        <button class="btn btn-success" onclick="agregarCircular()">➕ Guardar Circular</button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Registro de Circulares</h3>
+        <div id="listaCirculares"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN ACTIVIDADES ECONÓMICAS -->
+    <section id="actividades">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">💰 Actividades Económicas</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarActividadesExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('actividades', 'Actividades Económicas')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <h3>➕ Nueva Actividad</h3>
+        <div class="form-group">
+          <label>Nombre de la Actividad:</label>
+          <input type="text" id="nombreActividad" placeholder="Ej: Venta de refrigerios">
+        </div>
+        <div class="form-group">
+          <label>Fecha:</label>
+          <input type="date" id="fechaActividad">
+        </div>
+        <div class="form-group">
+          <label>Ingresos:</label>
+          <input type="number" id="ingresosActividad" step="0.01" min="0" placeholder="0.00">
+        </div>
+        <div class="form-group">
+          <label>Egresos:</label>
+          <input type="number" id="egresosActividad" step="0.01" min="0" placeholder="0.00">
+        </div>
+        <div class="form-group">
+          <label>Descripción:</label>
+          <textarea id="descActividad" rows="3"></textarea>
+        </div>
+        <button class="btn btn-success" onclick="agregarActividad()">➕ Registrar Actividad</button>
+      </div>
+
+      <div class="card">
+        <h3>📊 Resumen Financiero</h3>
+        <div id="resumenFinanciero"></div>
+      </div>
+
+      <div class="card">
+        <h3>📋 Historial de Actividades</h3>
+        <div id="listaActividades"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN INVENTARIO -->
+    <section id="inventario">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">📦 Inventario de Materiales</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarInventarioExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('inventario', 'Inventario')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <h3>➕ Agregar Material</h3>
+        <div class="form-group">
+          <label>Material/Ítem:</label>
+          <input type="text" id="nombreMaterial" placeholder="Nombre del material">
+        </div>
+        <div class="form-group">
+          <label>Cantidad:</label>
+          <input type="number" id="cantidadMaterial" min="1" value="1">
+        </div>
+        <div class="form-group">
+          <label>Estado:</label>
+          <select id="estadoMaterial">
+            <option value="bueno">Bueno</option>
+            <option value="regular">Regular</option>
+            <option value="malo">Malo/Necesita reparación</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ubicación:</label>
+          <input type="text" id="ubicacionMaterial" placeholder="Ej: Aula 5, Armario">
+        </div>
+        <div class="form-group">
+          <label>Observaciones:</label>
+          <textarea id="obsMaterial" rows="2"></textarea>
+        </div>
+        <button class="btn btn-success" onclick="agregarMaterial()">➕ Agregar al Inventario</button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Inventario Actual</h3>
+        <div id="listaInventario"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN ESTADÍSTICAS -->
+    <section id="estadisticas">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">📊 Estadísticas del Año Escolar</div>
+      
+      <div class="card">
+        <h3>📈 Resumen General</h3>
+        <div id="resumenEstadisticas"></div>
+      </div>
+      
+      <div class="card">
+        <h3>👥 Estudiantes por Grado</h3>
+        <div id="statsPorGrado"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN ASUNTOS VARIOS -->
+    <section id="asuntos">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">📋 Asuntos Varios</div>
+      
+      <!-- BOTONES DE EXPORTACIÓN -->
+      <div class="btn-exportar-container">
+        <button class="btn-exportar btn-exportar-excel" onclick="exportarAsuntosExcel()">
+          📊 Exportar a Excel
+        </button>
+        <button class="btn-exportar btn-exportar-json" onclick="exportarSeccionJSON('asuntos', 'Asuntos Varios')">
+          💾 Backup JSON
+        </button>
+      </div>
+      
+      <div class="card">
+        <h3>➕ Nuevo Asunto</h3>
+        <div class="form-group">
+          <label>Fecha:</label>
+          <input type="date" id="fechaAsunto">
+        </div>
+        <div class="form-group">
+          <label>Título:</label>
+          <input type="text" id="tituloAsunto" placeholder="Título del asunto">
+        </div>
+        <div class="form-group">
+          <label>Prioridad:</label>
+          <select id="prioridadAsunto">
+            <option value="alta">🔴 Alta</option>
+            <option value="media">🟡 Media</option>
+            <option value="baja">🟢 Baja</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Descripción:</label>
+          <textarea id="descAsunto" rows="4"></textarea>
+        </div>
+        <button class="btn btn-success" onclick="agregarAsunto()">➕ Agregar Asunto</button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Listado de Asuntos</h3>
+        <div id="listaAsuntos"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN HORARIO -->
+    <section id="horario">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">🕐 Horario Semanal</div>
+      <div class="card">
+        <p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Haz clic en cualquier celda para editar. Los cambios se guardan automáticamente.</p>
+        <div style="overflow-x:auto;">
+          <table class="horario-table" id="tablaHorario">
+            <thead>
+              <tr>
+                <th style="width:13%">Hora</th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miércoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+              </tr>
+            </thead>
+            <tbody id="horarioBody"></tbody>
+          </table>
+        </div>
+        <button class="horario-btn-limpiar" onclick="limpiarHorario()">🗑️ Limpiar horario</button>
+      </div>
+    </section>
+
+    <!-- SECCIÓN BACKUP/RESTORE -->
+    <section id="backup">
+      <div class="btn-regresar-wrap"><button class="btn-regresar" onclick="irAFuncionalidades()">← Funcionalidades</button></div>
+      <div class="section-title">💾 Copia de Seguridad</div>
+      
+      <!-- ESTADÍSTICAS DEL BACKUP -->
+      <div class="card">
+        <h3>📊 Resumen de tus Datos Actuales</h3>
+        <div class="backup-stats" id="backupStats"></div>
+        <p style="color: #666; text-align: center;">
+          Última modificación: <span id="ultimaModificacion">--</span>
+        </p>
+      </div>
+
+      <!-- EXPORTAR BACKUP -->
+      <div class="card">
+        <h3>📥 Crear Copia de Seguridad</h3>
+        <p>Exporta todos tus datos a un archivo que puedes guardar en tu dispositivo o compartir.</p>
+        
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+          <button class="btn btn-success" onclick="exportarBackup()">
+            💾 Descargar archivo (.json)
+          </button>
+          <button class="btn btn-info" onclick="copiarAlPortapapeles()">
+            📋 Copiar al portapapeles
+          </button>
+        </div>
+        
+        <div id="mensajeExportar" class="backup-status hidden" style="margin-top: 1rem;"></div>
+      </div>
+
+      <!-- RESTAURAR BACKUP -->
+      <div class="card">
+        <h3>📤 Restaurar desde Copia de Seguridad</h3>
+        <div class="backup-status backup-warning" style="background: #fff3cd; color: #856404; border-color: #ffeaa7;">
+          ⚠️ <strong>Advertencia:</strong> Restaurar reemplazará TODOS tus datos actuales. 
+          Asegúrate de haber exportado primero si quieres conservar algo.
+        </div>
+
+        <div class="import-area" id="backupDropZone" style="margin-top: 1rem;">
+          <p style="font-size: 3rem;">📂</p>
+          <p>Arrastra tu archivo .json aquí o haz clic para seleccionar</p>
+          <input type="file" id="backupFileInput" accept=".json" style="display: none;" onchange="procesarBackup(this.files[0])">
+          <button class="btn btn-warning" onclick="document.getElementById('backupFileInput').click()">
+            Seleccionar archivo de backup
+          </button>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <p>O pega el contenido del backup aquí:</p>
+          <textarea id="backupTextArea" rows="6" placeholder="Pega aquí el código del backup..." style="font-family: monospace; font-size: 0.9rem;"></textarea>
+          <button class="btn btn-warning" onclick="restaurarDesdeTexto()" style="margin-top: 0.5rem;">
+            Restaurar desde texto
+          </button>
+        </div>
+
+        <div id="mensajeRestaurar" class="backup-status hidden" style="margin-top: 1rem;"></div>
+      </div>
+
+      <!-- PREVISUALIZACIÓN DE BACKUP -->
+      <div id="previewBackupCard" class="card hidden">
+        <h3>👁️ Vista previa del Backup</h3>
+        <div class="backup-stats" id="previewStats"></div>
+        <div class="backup-preview" id="previewContenido"></div>
+        <div style="margin-top: 1rem; text-align: center;">
+          <button class="btn btn-success" onclick="confirmarRestauracion()">✅ Confirmar Restauración</button>
+          <button class="btn btn-danger" onclick="cancelarRestauracion()">❌ Cancelar</button>
+        </div>
+      </div>
+
+      <!-- INSTRUCCIONES -->
+      <div class="card">
+        <h3>❓ Cómo usar el Backup</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <div>
+            <h4>📥 Para guardar tus datos:</h4>
+            <ol>
+              <li>Haz clic en "Descargar archivo"</li>
+              <li>Guarda el archivo en lugar seguro</li>
+              <li>O copia el texto y pégalo en WhatsApp/Email</li>
+            </ol>
+          </div>
+          <div>
+            <h4>📤 Para recuperar datos:</h4>
+            <ol>
+              <li>Busca tu archivo .json anterior</li>
+              <li>Arrástralo a la zona de restaurar</li>
+              <li>Verifica la vista previa</li>
+              <li>Confirma la restauración</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL PARA EVENTOS -->
+  <div id="modalEvento" class="modal">
+    <div class="modal-content">
+      <h3>📅 Agregar Evento</h3>
+      <div class="form-group">
+        <label>Fecha:</label>
+        <input type="text" id="modalFecha" readonly>
+      </div>
+      <div class="form-group">
+        <label>Título:</label>
+        <input type="text" id="tituloEvento" placeholder="Título del evento">
+      </div>
+      <div class="form-group">
+        <label>Descripción:</label>
+        <textarea id="descEvento" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Tipo:</label>
+        <select id="tipoEvento">
+          <option value="reunion">Reunión</option>
+          <option value="entrega">Entrega de notas</option>
+          <option value="actividad">Actividad especial</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <button class="btn btn-success" onclick="guardarEvento()">💾 Guardar</button>
+      <button class="btn" onclick="cerrarModal()">❌ Cancelar</button>
+    </div>
+  </div>
+
+  <!-- SELECTOR PDF -->
+  <div id="pdfSelector" class="pdf-selector">
+    <h3>📄 Seleccionar secciones para PDF</h3>
+    <div id="pdfOptions"></div>
+    <button class="btn btn-success" onclick="generarPDF()" style="margin-top: 1rem; width: 100%;">📄 Generar PDF</button>
+    <button class="btn" onclick="cerrarSelectorPDF()" style="width: 100%; margin-top: 0.5rem;">❌ Cerrar</button>
+  </div>
+
+  <footer>
+    <p>Cuaderno Único Docente 2026<br>Desarrollado por José R. White</p>
+  </footer>
+
+  <!-- JavaScript INLINE -->
+  <script>
+    // ==================== VARIABLES GLOBALES ====================
+    let db = {
+      estudiantes: {},
+      asistencia: {},
+      eventos: {},
+      reuniones: [],
+      comisiones: [],
+      visitas: [],
+      permisos: [],
+      circulares: [],
+      actividades: [],
+      inventario: [],
+      asuntos: [],
+      horario: [],
+      datosDocente: {
+        titulo: 'Cuaderno Único Docente',
+        anio: '2026',
+        docente: 'José R. White',
+        escuela: '..........................................................',
+        grado: '........................................'
+      },
+      fechaCreacion: new Date().toISOString(),
+      version: '1.0'
+    };
+
+    let gradoActual = null;
+    let fechaEventoActual = null;
+    let backupPendiente = null;
+    let eventoEditandoIdx = null;
+
+    // ==================== INICIALIZACIÓN ====================
+    document.addEventListener('DOMContentLoaded', function() {
+      cargarDatos();
+      generarCalendario();
+      actualizarContadores();
+      setFechasPorDefecto();
+      inicializarBackupDropZone();
+      inicializarBusquedaGlobal(); // FASE 2: Búsqueda Global
+      
+      // Setup drag and drop para CSV
+      const dropZone = document.getElementById('dropZone');
+      if(dropZone) {
+        dropZone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => {
+          dropZone.classList.remove('dragover');
+        });
+        dropZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          dropZone.classList.remove('dragover');
+          const files = e.dataTransfer.files;
+          if(files.length) procesarCSV(files[0]);
+        });
+      }
+    });
+
+    function setFechasPorDefecto() {
+      const hoy = new Date().toISOString().split('T')[0];
+      const elementos = ['fechaAsistencia', 'fechaReunion', 'fechaVisita', 'fechaCircular', 
+                        'fechaActividad', 'fechaAsunto', 'fechaInicioPermiso', 'fechaFinPermiso'];
+      elementos.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.value = hoy;
+      });
+    }
+
+    // ==================== NAVEGACIÓN DE 3 PANTALLAS ====================
+    function regresarAPortada() {
+      // Ocultar sección actual y volver a portada
+      const anterior = document.querySelector('section.active');
+      if (anterior) anterior.classList.remove('active', 'fade-in');
+
+      const portada = document.getElementById('portada');
+      portada.style.opacity = '0';
+      portada.classList.add('active');
+      void portada.offsetHeight;
+      portada.classList.add('fade-in');
+      portada.style.opacity = '';
+
+      // Ocultar nav y header
+      document.getElementById('mainNav').classList.remove('visible');
+      document.getElementById('mainHeader').style.display = 'none';
+
+      window.scrollTo(0, 0);
+    }
+
+    function irABienvenida() {
+      // Ocultar sección actual
+      const anterior = document.querySelector('section.active');
+      if (anterior) anterior.classList.remove('active', 'fade-in');
+
+      const bienvenida = document.getElementById('bienvenida');
+      bienvenida.style.opacity = '0';
+      bienvenida.classList.add('active');
+      void bienvenida.offsetHeight;
+      bienvenida.classList.add('fade-in');
+      bienvenida.style.opacity = '';
+
+      // Mostrar nav y header
+      document.getElementById('mainNav').classList.add('visible');
+      document.getElementById('mainHeader').style.display = 'block';
+
+      window.scrollTo(0, 0);
+
+      // Activar botón inicio en nav
+      document.querySelectorAll('#mainNav button').forEach(b => b.classList.remove('active'));
+      document.querySelector('.btn-inicio').classList.add('active');
+    }
+
+    function irAFuncionalidades() {
+      // Ocultar sección actual
+      const anterior = document.querySelector('section.active');
+      if (anterior) anterior.classList.remove('active', 'fade-in');
+
+      const func = document.getElementById('funcionalidades');
+      func.style.opacity = '0';
+      func.classList.add('active');
+      void func.offsetHeight;
+      func.classList.add('fade-in');
+      func.style.opacity = '';
+
+      window.scrollTo(0, 0);
+    }
+
+    // ==================== NAVEGACIÓN GENERAL ====================
+    function mostrarSeccion(id, boton) {
+      // Si viene de portada, activar header y nav
+      if (document.getElementById('portada').classList.contains('active')) {
+        document.getElementById('portada').classList.remove('active');
+        document.getElementById('mainNav').classList.add('visible');
+        document.getElementById('mainHeader').style.display = 'block';
+      }
+
+      // OCULTAR TODAS LAS SECCIONES EXCEPTO PORTADA CON !important
+      document.querySelectorAll('section').forEach(seccion => {
+        if(seccion.id !== 'portada') {
+          seccion.classList.remove('active', 'fade-in');
+          seccion.style.setProperty('display', 'none', 'important');
+        }
+      });
+
+      // Activar nueva sección con fade
+      const nueva = document.getElementById(id);
+      nueva.style.removeProperty('display'); // Limpiar para que use CSS
+      nueva.style.opacity = '0';
+      nueva.classList.add('active');
+      void nueva.offsetHeight; // forzar reflow
+      nueva.classList.add('fade-in');
+      nueva.style.opacity = '';
+
+      // Scroll al top
+      window.scrollTo(0, 0);
+
+      // Siempre limpiar estado de todos los botones del nav
+      document.querySelectorAll('#mainNav button').forEach(b => b.classList.remove('active'));
+
+      // Mapeo de IDs de sección → clase del botón en el nav
+      const MAPEO_NAV = {
+        'bienvenida':   '.btn-inicio',
+        'dashboard':    '.btn-dashboard',
+        'calendario':   '.btn-calendario',
+        'estudiantes':  '.btn-estudiantes',
+        'asistencia':   '.btn-asistencia',
+        'reuniones':    '.btn-reuniones',
+        'comisiones':   '.btn-comisiones',
+        'visitas':      '.btn-visitas',
+        'permisos':     '.btn-permisos',
+        'circulares':   '.btn-circulares',
+        'actividades':  '.btn-actividades',
+        'inventario':   '.btn-inventario',
+        'estadisticas': '.btn-estadisticas',
+        'asuntos':      '.btn-asuntos',
+        'backup':       '.btn-backup',
+        'horario':      '.btn-horario'
+      };
+
+      // Si el botón pasado pertenece al nav, usarlo; si no (o si no se pasó), buscarlo por mapeo
+      let botonNav = (boton && boton.closest('#mainNav')) ? boton : null;
+      if (!botonNav && MAPEO_NAV[id]) {
+        botonNav = document.querySelector('#mainNav ' + MAPEO_NAV[id]);
+      }
+      if (botonNav) botonNav.classList.add('active');
+
+      // Cargar datos específicos de la sección
+      if (id === 'estadisticas') generarEstadisticas();
+      if (id === 'asuntos')      renderizarAsuntos();
+      if (id === 'reuniones')    renderizarReuniones();
+      if (id === 'comisiones')   renderizarComisiones();
+      if (id === 'visitas')      renderizarVisitas();
+      if (id === 'permisos')     renderizarPermisos();
+      if (id === 'circulares')   renderizarCirculares();
+      if (id === 'actividades')  renderizarActividades();
+      if (id === 'inventario')   renderizarInventario();
+      if (id === 'backup')       actualizarStatsBackup();
+      if (id === 'horario')      renderizarHorario();
+    }
+
+    // ==================== DATOS DOCENTE ====================
+    function guardarDato(campo, valor) {
+      db.datosDocente[campo] = valor;
+      
+      // Sincronizar entre portada y header principal
+      if (campo === 'titulo') {
+        document.getElementById('tituloCuaderno').textContent = valor;
+        document.getElementById('tituloPortada').textContent = valor;
+      }
+      if (campo === 'anio') {
+        document.getElementById('anioEscolar').textContent = valor;
+        document.getElementById('anioPortada').textContent = valor;
+      }
+      if (campo === 'docente') {
+        document.getElementById('nombreDocente').textContent = valor;
+        document.getElementById('docentePortada').textContent = valor;
+      }
+      if (campo === 'escuela') {
+        document.getElementById('nombreEscuela').textContent = valor;
+        document.getElementById('escuelaPortada').textContent = valor;
+      }
+      if (campo === 'grado') {
+        document.getElementById('gradoEscolar').textContent = valor;
+        document.getElementById('gradoPortada').textContent = valor;
+      }
+      
+      guardarDatos();
+    }
+
+    // ==================== ESTUDIANTES ====================
+    function seleccionarGrado(grado) {
+      gradoActual = grado;
+      document.getElementById('selectorGrados').classList.add('hidden');
+      document.getElementById('vistaGrado').classList.remove('hidden');
+      
+      const nombres = {
+        prek: 'Pre-K', kinder: 'Kinder', '1grado': '1° Grado',
+        '2grado': '2° Grado', '3grado': '3° Grado', '4grado': '4° Grado',
+        '5grado': '5° Grado', '6grado': '6° Grado'
+      };
+      document.getElementById('tituloGrado').textContent = `👥 Estudiantes de ${nombres[grado]}`;
+      
+      renderizarTabla();
+    }
+
+    function volverAGrados() {
+      document.getElementById('selectorGrados').classList.remove('hidden');
+      document.getElementById('vistaGrado').classList.add('hidden');
+      gradoActual = null;
+      actualizarContadores();
+    }
+
+    function procesarCSV(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const texto = e.target.result;
+        const lineas = texto.split('\n').filter(l => l.trim());
+        
+        for(let i = 1; i < lineas.length; i++) {
+          const cols = lineas[i].split(',');
+          if(cols.length >= 2) {
+            const est = {
+              id: Date.now() + i,
+              nombre: cols[0].trim(),
+              cedula: cols[1]?.trim() || '',
+              fechaNac: cols[2]?.trim() || '',
+              telefono: cols[3]?.trim() || '',
+              email: cols[4]?.trim() || '',
+              direccion: cols[5]?.trim() || '',
+              observaciones: cols[6]?.trim() || ''
+            };
+            
+            if(!db.estudiantes[gradoActual]) db.estudiantes[gradoActual] = [];
+            db.estudiantes[gradoActual].push(est);
+          }
+        }
+        guardarDatos();
+        renderizarTabla();
+        actualizarContadores();
+        mostrarMensaje('✅ Estudiantes importados correctamente', 'success');
+      };
+      reader.readAsText(file);
+    }
+
+    function agregarEstudiante() {
+      const est = {
+        id: Date.now(),
+        nombre: document.getElementById('nombreEstudiante').value,
+        cedula: document.getElementById('cedulaEstudiante').value,
+        fechaNac: document.getElementById('fechaNacimiento').value,
+        telefono: document.getElementById('telefonoPadre').value,
+        email: document.getElementById('emailPadre').value,
+        direccion: document.getElementById('direccion').value,
+        observaciones: document.getElementById('observaciones').value
+      };
+      
+      if(!est.nombre) {
+        alert('❌ El nombre es obligatorio');
+        return;
+      }
+      
+      if(!db.estudiantes[gradoActual]) db.estudiantes[gradoActual] = [];
+      db.estudiantes[gradoActual].push(est);
+      guardarDatos();
+      renderizarTabla();
+      actualizarContadores();
+      
+      // Limpiar formulario
+      ['nombreEstudiante', 'cedulaEstudiante', 'fechaNacimiento', 'telefonoPadre', 
+       'emailPadre', 'direccion', 'observaciones'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+
+    function eliminarEstudiante(id) {
+      if(confirm('¿Eliminar este estudiante?')) {
+        db.estudiantes[gradoActual] = db.estudiantes[gradoActual].filter(e => e.id !== id);
+        guardarDatos();
+        renderizarTabla();
+        actualizarContadores();
+      }
+    }
+
+    function renderizarTabla() {
+      const tbody = document.getElementById('tablaEstudiantes');
+      if(!db.estudiantes[gradoActual]) db.estudiantes[gradoActual] = [];
+      
+      tbody.innerHTML = db.estudiantes[gradoActual].map(e => `
+        <tr>
+          <td><input type="checkbox" class="checkbox-estudiante" value="${e.id}"></td>
+          <td>${e.nombre}</td>
+          <td>${e.cedula}</td>
+          <td>${e.telefono}</td>
+          <td>
+            <button class="btn btn-danger" onclick="eliminarEstudiante(${e.id})">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function toggleTodos(checkbox) {
+      document.querySelectorAll('.checkbox-estudiante').forEach(c => c.checked = checkbox.checked);
+    }
+
+    function seleccionarTodos() {
+      document.querySelectorAll('.checkbox-estudiante').forEach(c => c.checked = true);
+      document.getElementById('checkAll').checked = true;
+    }
+
+    function deseleccionarTodos() {
+      document.querySelectorAll('.checkbox-estudiante').forEach(c => c.checked = false);
+      document.getElementById('checkAll').checked = false;
+    }
+
+    function exportarSeleccionadosCSV() {
+      const seleccionados = Array.from(document.querySelectorAll('.checkbox-estudiante:checked')).map(c => {
+        const id = parseInt(c.value);
+        return db.estudiantes[gradoActual].find(e => e.id === id);
+      }).filter(e => e);
+      
+      if(seleccionados.length === 0) {
+        alert('❌ No hay estudiantes seleccionados');
+        return;
+      }
+      
+      let csv = 'nombre,cedula,fecha_nac,telefono,email,direccion,observaciones\n';
+      seleccionados.forEach(e => {
+        csv += `"${e.nombre}","${e.cedula}","${e.fechaNac}","${e.telefono}","${e.email}","${e.direccion}","${e.observaciones}"\n`;
+      });
+      
+      descargarArchivo(csv, `estudiantes_${gradoActual}_${new Date().toISOString().split('T')[0]}.csv`, 'text/csv');
+    }
+
+    function actualizarContadores() {
+      ['prek', 'kinder', '1grado', '2grado', '3grado', '4grado', '5grado', '6grado'].forEach(g => {
+        const count = db.estudiantes[g] ? db.estudiantes[g].length : 0;
+        const el = document.getElementById(`count-${g}`);
+        if(el) el.textContent = `${count} estudiante${count !== 1 ? 's' : ''}`;
+      });
+    }
+
+    // ==================== ASISTENCIA ====================
+    function cargarAsistencia() {
+      const grado = document.getElementById('gradoAsistencia').value;
+      const fecha = document.getElementById('fechaAsistencia').value;
+      
+      if(!grado || !fecha) return;
+      
+      const contenedor = document.getElementById('listaAsistencia');
+      const estudiantes = db.estudiantes[grado] || [];
+      
+      if(estudiantes.length === 0) {
+        contenedor.innerHTML = '<p>No hay estudiantes registrados en este grado.</p>';
+        document.getElementById('panelAsistencia').classList.remove('hidden');
+        return;
+      }
+      
+      const key = `${grado}_${fecha}`;
+      const asistenciaPrev = db.asistencia[key] || {};
+      
+      contenedor.innerHTML = estudiantes.map(e => {
+        const estado = asistenciaPrev[e.id] || 'presente';
+        return `
+          <div class="asistencia-card ${estado}" id="asist-${e.id}" onclick="toggleAsistencia(${e.id})">
+            <h4>${e.nombre}</h4>
+            <p class="estado-texto">${estado === 'presente' ? '✅ Presente' : '❌ Ausente'}</p>
+            <input type="hidden" id="estado-${e.id}" value="${estado}">
+          </div>
+        `;
+      }).join('');
+      
+      document.getElementById('panelAsistencia').classList.remove('hidden');
+    }
+
+    function toggleAsistencia(id) {
+      const input = document.getElementById(`estado-${id}`);
+      const card = document.getElementById(`asist-${id}`);
+      const texto = card.querySelector('.estado-texto');
+      
+      if(input.value === 'presente') {
+        input.value = 'ausente';
+        card.classList.remove('presente');
+        card.classList.add('ausente');
+        texto.textContent = '❌ Ausente';
+      } else {
+        input.value = 'presente';
+        card.classList.remove('ausente');
+        card.classList.add('presente');
+        texto.textContent = '✅ Presente';
+      }
+    }
+
+    function guardarAsistencia() {
+      const grado = document.getElementById('gradoAsistencia').value;
+      const fecha = document.getElementById('fechaAsistencia').value;
+      const key = `${grado}_${fecha}`;
+      
+      db.asistencia[key] = {};
+      document.querySelectorAll('[id^="estado-"]').forEach(input => {
+        const id = parseInt(input.id.replace('estado-', ''));
+        db.asistencia[key][id] = input.value;
+      });
+      
+      guardarDatos();
+      mostrarMensaje('✅ Asistencia guardada correctamente', 'success');
+    }
+    
+    function mostrarHistorialAsistencia() {
+      const grado = document.getElementById('gradoAsistencia').value;
+      if(!grado) { alert('⚠️ Primero selecciona un grado'); return; }
+      const registros = {};
+      Object.keys(db.asistencia).forEach(key => {
+        if(key.startsWith(grado + '_')) {
+          const fecha = key.split('_')[1];
+          registros[fecha] = db.asistencia[key];
+        }
+      });
+      const fechas = Object.keys(registros).sort().reverse();
+      if(fechas.length === 0) { alert('No hay registros de asistencia para este grado'); return; }
+      let html = `<div class="modal-historial-asistencia" id="modalHistorialAsistencia"><div class="modal-content-grande"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;"><h3>📋 Historial de Asistencia - ${obtenerNombreGrado(grado)}</h3><button class="btn" onclick="cerrarHistorialAsistencia()">✖️ Cerrar</button></div><div class="filtros-historial"><label>Filtrar por mes:</label><select id="filtroMesAsistencia" onchange="filtrarHistorialAsistencia()"><option value="">Todos los meses</option>${generarOpcionesMeses(fechas)}</select><button class="btn btn-success" onclick="exportarAsistenciaCSV('${grado}')" style="margin-left: auto;">📊 Exportar a Excel</button></div><div class="resumen-asistencia" id="resumenAsistencia"></div><div style="overflow-x: auto; max-height: 60vh; overflow-y: auto;"><table class="tabla-historial-asistencia"><thead><tr><th style="position: sticky; top: 0; background: white; z-index: 10;">Fecha</th><th style="position: sticky; top: 0; background: white; z-index: 10;">Total</th><th style="position: sticky; top: 0; background: white; z-index: 10;">Presentes</th><th style="position: sticky; top: 0; background: white; z-index: 10;">Ausentes</th><th style="position: sticky; top: 0; background: white; z-index: 10;">Tardanzas</th><th style="position: sticky; top: 0; background: white; z-index: 10;">Permisos</th><th style="position: sticky; top: 0; background: white; z-index: 10;">% Asistencia</th><th style="position: sticky; top: 0; background: white; z-index: 10;">Acciones</th></tr></thead><tbody id="cuerpoTablaHistorial">${generarFilasHistorialAsistencia(fechas, registros, grado)}</tbody></table></div></div></div>`;
+      const existente = document.getElementById('modalHistorialAsistencia');
+      if(existente) existente.remove();
+      document.body.insertAdjacentHTML('beforeend', html);
+      calcularResumenAsistencia(fechas, registros);
+    }
+    function generarFilasHistorialAsistencia(fechas, registros, grado) {
+      return fechas.map(fecha => {
+        const stats = calcularEstadisticasDia(registros[fecha]);
+        return `<tr class="fila-historial-fecha" data-fecha="${fecha}"><td><strong>${formatearFechaEvento(fecha)}</strong></td><td>${stats.total}</td><td style="color: #2E7D32;">${stats.presentes}</td><td style="color: #f44336;">${stats.ausentes}</td><td style="color: #ff9800;">${stats.tardanzas}</td><td style="color: #2196F3;">${stats.permisos}</td><td><strong>${stats.porcentaje}%</strong></td><td><button class="btn-icon" onclick="editarAsistenciaFecha('${fecha}')" title="Editar">✏️</button><button class="btn-icon btn-eliminar" onclick="eliminarAsistenciaFecha('${grado}', '${fecha}')" title="Eliminar">🗑️</button></td></tr>`;
+      }).join('');
+    }
+    function calcularEstadisticasDia(registro) {
+      let presentes = 0, ausentes = 0, tardanzas = 0, permisos = 0;
+      Object.values(registro || {}).forEach(estado => {
+        if(estado === 'P') presentes++;
+        else if(estado === 'A') ausentes++;
+        else if(estado === 'T') tardanzas++;
+        else if(estado === 'X') permisos++;
+      });
+      const total = presentes + ausentes + tardanzas + permisos;
+      const porcentaje = total > 0 ? Math.round((presentes / total) * 100) : 0;
+      return { total, presentes, ausentes, tardanzas, permisos, porcentaje };
+    }
+    function calcularResumenAsistencia(fechas, registros) {
+      let totalPresentes = 0, totalAusentes = 0, totalTardanzas = 0, totalPermisos = 0;
+      fechas.forEach(fecha => {
+        const stats = calcularEstadisticasDia(registros[fecha]);
+        totalPresentes += stats.presentes;
+        totalAusentes += stats.ausentes;
+        totalTardanzas += stats.tardanzas;
+        totalPermisos += stats.permisos;
+      });
+      const totalRegistros = totalPresentes + totalAusentes + totalTardanzas + totalPermisos;
+      const promedioAsistencia = totalRegistros > 0 ? Math.round((totalPresentes / totalRegistros) * 100) : 0;
+      document.getElementById('resumenAsistencia').innerHTML = `<div class="card" style="background: #e8f5e9; padding: 1rem; margin: 1rem 0;"><strong>📊 Resumen General:</strong> ${fechas.length} días registrados | Promedio de asistencia: <strong style="color: #2E7D32; font-size: 1.3rem;">${promedioAsistencia}%</strong><br><span style="color: #2E7D32;">✓ ${totalPresentes} presentes</span> | <span style="color: #f44336;">✗ ${totalAusentes} ausentes</span> | <span style="color: #ff9800;">⏰ ${totalTardanzas} tardanzas</span> | <span style="color: #2196F3;">📋 ${totalPermisos} permisos</span></div>`;
+    }
+    function generarOpcionesMeses(fechas) {
+      const mesesUnicos = [...new Set(fechas.map(f => f.substring(0, 7)))].sort().reverse();
+      const nombresMeses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+      return mesesUnicos.map(mes => {
+        const [anio, mesNum] = mes.split('-');
+        return `<option value="${mes}">${nombresMeses[parseInt(mesNum)-1]} ${anio}</option>`;
+      }).join('');
+    }
+    function filtrarHistorialAsistencia() {
+      const mesSeleccionado = document.getElementById('filtroMesAsistencia').value;
+      const filas = document.querySelectorAll('.fila-historial-fecha');
+      filas.forEach(fila => {
+        const fecha = fila.getAttribute('data-fecha');
+        fila.style.display = (!mesSeleccionado || fecha.startsWith(mesSeleccionado)) ? '' : 'none';
+      });
+    }
+    function editarAsistenciaFecha(fecha) {
+      document.getElementById('fechaAsistencia').value = fecha;
+      cerrarHistorialAsistencia();
+      alert('✏️ Ahora puedes editar la asistencia del ' + formatearFechaEvento(fecha));
+    }
+    function eliminarAsistenciaFecha(grado, fecha) {
+      if(!confirm(`¿Eliminar toda la asistencia del ${formatearFechaEvento(fecha)}?`)) return;
+      const key = `${grado}_${fecha}`;
+      if(db.asistencia[key]) {
+        delete db.asistencia[key];
+        guardarDatos();
+        mostrarHistorialAsistencia();
+        alert('✅ Asistencia eliminada');
+      }
+    }
+    function cerrarHistorialAsistencia() {
+      const modal = document.getElementById('modalHistorialAsistencia');
+      if(modal) modal.remove();
+    }
+    function exportarAsistenciaCSV(grado) {
+      const registros = {};
+      Object.keys(db.asistencia).forEach(key => {
+        if(key.startsWith(grado + '_')) {
+          const fecha = key.split('_')[1];
+          registros[fecha] = db.asistencia[key];
+        }
+      });
+      const fechas = Object.keys(registros).sort();
+      let csv = 'Fecha,Total,Presentes,Ausentes,Tardanzas,Permisos,% Asistencia\n';
+      fechas.forEach(fecha => {
+        const stats = calcularEstadisticasDia(registros[fecha]);
+        csv += `${fecha},${stats.total},${stats.presentes},${stats.ausentes},${stats.tardanzas},${stats.permisos},${stats.porcentaje}%\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `asistencia_${grado}_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+      alert('✅ Archivo CSV descargado (ábrelo en Excel)');
+    }
+    function obtenerNombreGrado(grado) {
+      const nombres = { 'prek': 'Pre-K', 'kinder': 'Kinder', '1grado': '1° Grado', '2grado': '2° Grado', '3grado': '3° Grado', '4grado': '4° Grado', '5grado': '5° Grado', '6grado': '6° Grado' };
+      return nombres[grado] || grado;
+    }
+
+    // ==================== CALENDARIO ====================
+    function generarCalendario() {
+      const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+      const container = document.getElementById('calendarioContainer');
+      
+      container.innerHTML = meses.map((mes, idx) => {
+        const fecha = new Date(2026, idx, 1);
+        const diasEnMes = new Date(2026, idx + 1, 0).getDate();
+        const primerDia = fecha.getDay();
+        
+        let html = `<div class="mes-mini">
+          <h4>${mes} 2026</h4>
+          <table>
+            <tr><th>D</th><th>L</th><th>M</th><th>M</th><th>J</th><th>V</th><th>S</th></tr>
+            <tr>`;
+        
+        for(let i = 0; i < primerDia; i++) html += '<td></td>';
+        
+        for(let dia = 1; dia <= diasEnMes; dia++) {
+          const fechaStr = `2026-${String(idx + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+          const tieneEvento = db.eventos[fechaStr] && db.eventos[fechaStr].length > 0;
+          const claseExtra = obtenerClaseDiaEspecial(fechaStr, dia, idx);
+          
+          html += `<td class="${tieneEvento ? 'dia-con-evento' : ''} ${claseExtra}" 
+                     onclick="abrirModalEvento('${fechaStr}')">${dia}</td>`;
+          
+          if((primerDia + dia) % 7 === 0 && dia !== diasEnMes) html += '</tr><tr>';
+        }
+        
+        html += '</tr></table></div>';
+        return html;
+      }).join('');
+      
+      renderizarEventosProximos();
+    }
+
+    function obtenerClaseDiaEspecial(fechaStr, dia, mes) {
+      if(fechaStr >= '2026-02-23' && fechaStr <= '2026-02-27') return 'highlight-org';
+      if(fechaStr === '2026-03-02') return 'highlight-inicio';
+      if(fechaStr >= '2026-06-01' && fechaStr <= '2026-06-05') return 'highlight-receso';
+      if(fechaStr >= '2026-09-07' && fechaStr <= '2026-09-11') return 'highlight-receso';
+      if(fechaStr === '2026-12-11') return 'highlight-fin';
+      return '';
+    }
+
+    function abrirModalEvento(fecha) {
+      fechaEventoActual = fecha;
+      eventoEditandoIdx = null; // Reset edit mode
+      
+      document.getElementById('modalFecha').value = fecha;
+      
+      // Verificar si la fecha ya tiene eventos
+      const eventosExistentes = db.eventos[fecha];
+      
+      if(eventosExistentes && eventosExistentes.length > 0) {
+        // Si hay eventos, mostrar el primero para editar
+        const primerEvento = eventosExistentes[0];
+        document.getElementById('tituloEvento').value = primerEvento.titulo;
+        document.getElementById('descEvento').value = primerEvento.descripcion || '';
+        document.getElementById('tipoEvento').value = primerEvento.tipo || 'reunion';
+        
+        // Indicar que está editando el primer evento
+        eventoEditandoIdx = 0;
+        
+        // Cambiar título del modal
+        const modalTitle = document.querySelector('#modalEvento h3');
+        if(modalTitle) {
+          modalTitle.textContent = `✏️ Editar Evento - ${fecha}`;
+        }
+        
+        // Mostrar mensaje si hay más eventos
+        if(eventosExistentes.length > 1) {
+          setTimeout(() => {
+            alert(`ℹ️ Esta fecha tiene ${eventosExistentes.length} eventos. Editando el primero: "${primerEvento.titulo}"`);
+          }, 100);
+        }
+      } else {
+        // Si no hay eventos, limpiar campos para crear uno nuevo
+        document.getElementById('tituloEvento').value = '';
+        document.getElementById('descEvento').value = '';
+        document.getElementById('tipoEvento').value = 'reunion';
+        
+        // Restaurar título del modal
+        const modalTitle = document.querySelector('#modalEvento h3');
+        if(modalTitle) {
+          modalTitle.textContent = '📅 Agregar Evento';
+        }
+      }
+      
+      document.getElementById('modalEvento').classList.add('active');
+    }
+
+    function cerrarModal() {
+      document.getElementById('modalEvento').classList.remove('active');
+    }
+
+    function guardarEvento() {
+      const titulo = document.getElementById('tituloEvento').value.trim();
+      if(!titulo) {
+        alert('❌ El título es obligatorio');
+        return;
+      }
+      
+      const nuevoEvento = {
+        titulo: titulo,
+        descripcion: document.getElementById('descEvento').value.trim(),
+        tipo: document.getElementById('tipoEvento').value
+      };
+      
+      if(typeof eventoEditandoIdx !== 'undefined' && eventoEditandoIdx !== null) {
+        if(db.eventos[fechaEventoActual] && db.eventos[fechaEventoActual][eventoEditandoIdx]) {
+          db.eventos[fechaEventoActual][eventoEditandoIdx] = nuevoEvento;
+        }
+        eventoEditandoIdx = null;
+      } else {
+        if(!db.eventos[fechaEventoActual]) db.eventos[fechaEventoActual] = [];
+        db.eventos[fechaEventoActual].push(nuevoEvento);
+      }
+      
+      const modalContent = document.querySelector('#modalEvento h3');
+      if(modalContent) modalContent.textContent = '📅 Agregar Evento';
+      
+      guardarDatos();
+      generarCalendario();
+      cerrarModal();
+    }
+
+    function renderizarEventosProximos() {
+      const hoy = new Date().toISOString().split('T')[0];
+      const eventosPasados = [];
+      const eventosHoy = [];
+      const eventosFuturos = [];
+      
+      Object.keys(db.eventos || {}).forEach(fecha => {
+        db.eventos[fecha].forEach((e, idx) => {
+          const evento = {fecha, ...e, _idx: idx};
+          if(fecha < hoy) eventosPasados.push(evento);
+          else if(fecha === hoy) eventosHoy.push(evento);
+          else eventosFuturos.push(evento);
+        });
+      });
+      
+      eventosPasados.sort((a, b) => b.fecha.localeCompare(a.fecha));
+      eventosFuturos.sort((a, b) => a.fecha.localeCompare(b.fecha));
+      
+      const contenedor = document.getElementById('listaEventosProximos');
+      const totalEventos = eventosPasados.length + eventosHoy.length + eventosFuturos.length;
+      
+      if(totalEventos === 0) {
+        contenedor.innerHTML = '<p style="color: #999; text-align: center; padding: 2rem;">No hay eventos registrados</p>';
+        return;
+      }
+      
+      let html = '';
+      
+      if(eventosHoy.length > 0) {
+        html += '<div class="eventos-seccion"><h4 style="color: #f5576c; margin: 1rem 0 0.5rem 0;">🔴 HOY</h4>';
+        html += eventosHoy.map(e => generarHTMLEvento(e, 'hoy')).join('') + '</div>';
+      }
+      
+      if(eventosFuturos.length > 0) {
+        html += '<div class="eventos-seccion"><h4 style="color: #2E7D32; margin: 1.5rem 0 0.5rem 0;">📅 Próximos eventos</h4>';
+        html += eventosFuturos.slice(0, 10).map(e => generarHTMLEvento(e, 'futuro')).join('');
+        if(eventosFuturos.length > 10) html += `<p style="text-align: center; color: #666; margin: 1rem 0;">... y ${eventosFuturos.length - 10} eventos más</p>`;
+        html += '</div>';
+      }
+      
+      if(eventosPasados.length > 0) {
+        html += '<div class="eventos-seccion">';
+        html += `<h4 style="color: #666; margin: 1.5rem 0 0.5rem 0; cursor: pointer;" onclick="document.getElementById('eventosPasadosLista').classList.toggle('hidden')">📋 Eventos anteriores (${eventosPasados.length}) <span style="font-size: 0.8rem;">▼ click para ver</span></h4>`;
+        html += '<div id="eventosPasadosLista" class="hidden">';
+        html += eventosPasados.slice(0, 15).map(e => generarHTMLEvento(e, 'pasado')).join('');
+        if(eventosPasados.length > 15) html += `<p style="text-align: center; color: #999; margin: 1rem 0;">... y ${eventosPasados.length - 15} eventos más antiguos</p>`;
+        html += '</div></div>';
+      }
+      
+      contenedor.innerHTML = html;
+    }
+    
+    function generarHTMLEvento(evento, tipo) {
+      const estiloTipo = {
+        'hoy': 'border-left-color: #f5576c; background: #fff5f7;',
+        'futuro': 'border-left-color: #2E7D32; background: #f9f9f9;',
+        'pasado': 'border-left-color: #999; background: #fafafa; opacity: 0.8;'
+      };
+      return `<div class="evento-item" style="${estiloTipo[tipo]}"><div style="display: flex; justify-content: space-between; align-items: start;"><div style="flex: 1;"><strong style="color: ${tipo === 'pasado' ? '#666' : '#2E7D32'}; font-size: 1.1rem;">${formatearFechaEvento(evento.fecha)}</strong><h4 style="margin: 0.5rem 0; font-size: 1.2rem;">${evento.titulo}</h4>${evento.descripcion ? `<p style="margin: 0.5rem 0; color: #666;">${evento.descripcion}</p>` : ''}<span class="evento-tipo">${obtenerEmojiTipo(evento.tipo)} ${evento.tipo}</span></div><div style="display: flex; gap: 0.5rem; margin-left: 1rem;"><button class="btn-icon" onclick="editarEvento('${evento.fecha}', ${evento._idx})" title="Editar evento">✏️</button><button class="btn-icon btn-eliminar" onclick="eliminarEvento('${evento.fecha}', ${evento._idx})" title="Eliminar evento">🗑️</button></div></div></div>`;
+    }
+    
+    function formatearFechaEvento(fechaStr) {
+      const [anio, mes, dia] = fechaStr.split('-');
+      const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+      const fecha = new Date(fechaStr + 'T12:00:00');
+      const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+      return `${diasSemana[fecha.getDay()]}, ${dia} ${meses[parseInt(mes)-1]} ${anio}`;
+    }
+    
+    function obtenerEmojiTipo(tipo) {
+      const emojis = { 'reunion': '🤝', 'entrega': '📝', 'actividad': '🎉', 'otro': '📌' };
+      return emojis[tipo] || '📌';
+    }
+    
+    function editarEvento(fecha, idx) {
+      const evento = db.eventos[fecha][idx];
+      if(!evento) { alert('❌ Evento no encontrado'); return; }
+      fechaEventoActual = fecha;
+      eventoEditandoIdx = idx;
+      document.getElementById('modalFecha').value = fecha;
+      document.getElementById('tituloEvento').value = evento.titulo;
+      document.getElementById('descEvento').value = evento.descripcion || '';
+      document.getElementById('tipoEvento').value = evento.tipo;
+      const modalContent = document.querySelector('#modalEvento h3');
+      if(modalContent) modalContent.textContent = '✏️ Editar Evento';
+      document.getElementById('modalEvento').classList.add('active');
+    }
+    
+    function eliminarEvento(fecha, idx) {
+      if(!confirm('¿Estás seguro de eliminar este evento?')) return;
+      if(db.eventos[fecha] && db.eventos[fecha][idx]) {
+        db.eventos[fecha].splice(idx, 1);
+        if(db.eventos[fecha].length === 0) delete db.eventos[fecha];
+        guardarDatos();
+        generarCalendario();
+        alert('✅ Evento eliminado');
+      }
+    }
+
+    // ==================== REUNIONES ====================
+    function agregarReunion() {
+      const r = {
+        id: Date.now(),
+        fecha: document.getElementById('fechaReunion').value,
+        tema: document.getElementById('temaReunion').value,
+        participantes: document.getElementById('participantesReunion').value,
+        acuerdos: document.getElementById('acuerdosReunion').value
+      };
+      
+      if(!r.tema) {
+        alert('❌ El tema es obligatorio');
+        return;
+      }
+      
+      if(reunionEditandoIdx !== null) {
+        db.reuniones[reunionEditandoIdx] = r;
+        reunionEditandoIdx = null;
+      } else {
+        db.reuniones.unshift(r);
+      }
+      guardarDatos();
+      renderizarReuniones();
+      
+      document.getElementById('temaReunion').value = '';
+      document.getElementById('participantesReunion').value = '';
+      document.getElementById('acuerdosReunion').value = '';
+    }
+
+    function renderizarReuniones() {
+      const cont = document.getElementById('listaReuniones');
+      if(db.reuniones.length === 0) {
+        cont.innerHTML = '<p>No hay reuniones registradas</p>';
+        return;
+      }
+      
+      cont.innerHTML = db.reuniones.map((r, index) => `
+        <div class="evento-item">
+          <strong>${r.fecha}</strong> - ${r.tema}
+          <p><strong>Participantes:</strong> ${r.participantes}</p>
+          <p><strong>Acuerdos:</strong> ${r.acuerdos}</p>
+          <button class="btn-icon" onclick="editarReunion(${index})" title="Editar">✏️</button>
+          <button class="btn btn-danger" onclick="eliminarReunion(${r.id})" style="margin-top: 0.5rem;">🗑️ Eliminar</button>
+        </div>
+      `).join('');
+    }
+
+    function eliminarReunion(id) {
+      db.reuniones = db.reuniones.filter(r => r.id !== id);
+      guardarDatos();
+      renderizarReuniones();
+    }
+
+    // ==================== COMISIONES ====================
+    function agregarComision() {
+      const c = {
+        id: Date.now(),
+        nombre: document.getElementById('nombreComision').value,
+        integrantes: document.getElementById('integrantesComision').value,
+        funciones: document.getElementById('funcionesComision').value
+      };
+      
+      if(!c.nombre) {
+        alert('❌ El nombre es obligatorio');
+        return;
+      }
+      
+      if(comisionEditandoIdx !== null) {
+        db.comisiones[comisionEditandoIdx] = c;
+        comisionEditandoIdx = null;
+      } else {
+        db.comisiones.push(c);
+      }
+      guardarDatos();
+      renderizarComisiones();
+      
+      document.getElementById('nombreComision').value = '';
+      document.getElementById('integrantesComision').value = '';
+      document.getElementById('funcionesComision').value = '';
+    }
+
+    function renderizarComisiones() {
+      const cont = document.getElementById('listaComisiones');
+      if(db.comisiones.length === 0) {
+        cont.innerHTML = '<p>No hay comisiones registradas</p>';
+        return;
+      }
+      
+      cont.innerHTML = db.comisiones.map((c, index) => `
+        <div class="evento-item">
+          <h4>${c.nombre}</h4>
+          <p><strong>Integrantes:</strong> ${c.integrantes}</p>
+          <p><strong>Funciones:</strong> ${c.funciones}</p>
+          <button class="btn-icon" onclick="editarComision(${index})" title="Editar">✏️</button> <button class="btn btn-danger" onclick="eliminarComision(${c.id})" style="margin-top: 0.5rem;">🗑️ Eliminar</button>
+        </div>
+      `).join('');
+    }
+
+    function eliminarComision(id) {
+      db.comisiones = db.comisiones.filter(c => c.id !== id);
+      guardarDatos();
+      renderizarComisiones();
+    }
+
+    // ==================== VISITAS ====================
+    function agregarVisita() {
+      const v = {
+        id: Date.now(),
+        fecha: document.getElementById('fechaVisita').value,
+        lugar: document.getElementById('lugarVisita').value,
+        grado: document.getElementById('gradoVisita').value,
+        cantidad: document.getElementById('cantidadVisita').value,
+        responsables: document.getElementById('responsablesVisita').value,
+        observaciones: document.getElementById('observacionesVisita').value
+      };
+      
+      if(!v.lugar) {
+        alert('❌ El lugar es obligatorio');
+        return;
+      }
+      
+      if(visitaEditandoIdx !== null) {
+        db.visitas[visitaEditandoIdx] = v;
+        visitaEditandoIdx = null;
+      } else {
+        db.visitas.unshift(v);
+      }
+      guardarDatos();
+      renderizarVisitas();
+      
+      ['lugarVisita', 'gradoVisita', 'cantidadVisita', 'responsablesVisita', 'observacionesVisita'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+
+    function renderizarVisitas() {
+      const cont = document.getElementById('listaVisitas');
+      if(db.visitas.length === 0) {
+        cont.innerHTML = '<p>No hay visitas registradas</p>';
+        return;
+      }
+      
+      cont.innerHTML = db.visitas.map((v, index) => `
+        <div class="evento-item">
+          <strong>${v.fecha}</strong> - ${v.lugar}
+          <p><strong>Grado(s):</strong> ${v.grado} | <strong>Estudiantes:</strong> ${v.cantidad}</p>
+          <p><strong>Responsables:</strong> ${v.responsables}</p>
+          <p>${v.observaciones}</p>
+          <button class="btn-icon" onclick="editarVisita(${index})" title="Editar">✏️</button> <button class="btn btn-danger" onclick="eliminarVisita(${v.id})" style="margin-top: 0.5rem;">🗑️ Eliminar</button>
+        </div>
+      `).join('');
+    }
+
+    function eliminarVisita(id) {
+      db.visitas = db.visitas.filter(v => v.id !== id);
+      guardarDatos();
+      renderizarVisitas();
+    }
+
+    // ==================== PERMISOS ====================
+    function agregarPermiso() {
+      const p = {
+        id: Date.now(),
+        tipo: document.getElementById('tipoPermiso').value,
+        fechaInicio: document.getElementById('fechaInicioPermiso').value,
+        fechaFin: document.getElementById('fechaFinPermiso').value,
+        motivo: document.getElementById('motivoPermiso').value,
+        observaciones: document.getElementById('obsPermiso').value
+      };
+      
+      if(!p.motivo) {
+        alert('❌ El motivo es obligatorio');
+        return;
+      }
+      
+      if(permisoEditandoIdx !== null) {
+        db.permisos[permisoEditandoIdx] = p;
+        permisoEditandoIdx = null;
+      } else {
+        db.permisos.unshift(p);
+      }
+      guardarDatos();
+      renderizarPermisos();
+      
+      document.getElementById('motivoPermiso').value = '';
+      document.getElementById('obsPermiso').value = '';
+    }
+
+    function renderizarPermisos() {
+      const cont = document.getElementById('listaPermisos');
+      if(db.permisos.length === 0) {
+        cont.innerHTML = '<p>No hay permisos registrados</p>';
+        return;
+      }
+      
+      const tipos = {personal: 'Personal', enfermedad: 'Enfermedad', capacitacion: 'Capacitación', otro: 'Otro'};
+      
+      cont.innerHTML = db.permisos.map((p, index) => `
+        <div class="evento-item">
+          <strong>${p.fechaInicio} al ${p.fechaFin}</strong> - ${tipos[p.tipo]}
+          <p><strong>Motivo:</strong> ${p.motivo}</p>
+          <p>${p.observaciones}</p>
+          <button class="btn-icon" onclick="editarPermiso(${index})" title="Editar">✏️</button> <button class="btn btn-danger" onclick="eliminarPermiso(${p.id})" style="margin-top: 0.5rem;">🗑️ Eliminar</button>
+        </div>
+      `).join('');
+    }
+
+    function eliminarPermiso(id) {
+      db.permisos = db.permisos.filter(p => p.id !== id);
+      guardarDatos();
+      renderizarPermisos();
+    }
+
+    // ==================== CIRCULARES ====================
+    function agregarCircular() {
+      const c = {
+        id: Date.now(),
+        fecha: document.getElementById('fechaCircular').value,
+        numero: document.getElementById('numeroCircular').value,
+        asunto: document.getElementById('asuntoCircular').value,
+        destinatarios: document.getElementById('destinatariosCircular').value,
+        contenido: document.getElementById('contenidoCircular').value
+      };
+      
+      if(!c.asunto) {
+        alert('❌ El asunto es obligatorio');
+        return;
+      }
+      
+      if(circularEditandoIdx !== null) {
+        db.circulares[circularEditandoIdx] = c;
+        circularEditandoIdx = null;
+      } else {
+        db.circulares.unshift(c);
+      }
+      guardarDatos();
+      renderizarCirculares();
+      
+      ['numeroCircular', 'asuntoCircular', 'destinatariosCircular', 'contenidoCircular'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+
+    function renderizarCirculares() {
+      const cont = document.getElementById('listaCirculares');
+      if(db.circulares.length === 0) {
+        cont.innerHTML = '<p>No hay circulares registradas</p>';
+        return;
+      }
+      
+      cont.innerHTML = db.circulares.map((c, index) => `
+        <div class="evento-item">
+          <strong>${c.fecha}</strong> - ${c.numero || 'Sin número'}
+          <h4>${c.asunto}</h4>
+          <p><strong>Para:</strong> ${c.destinatarios}</p>
+          <p>${c.contenido}</p>
+          <button class="btn-icon" onclick="editarCircular(${index})" title="Editar">✏️</button> <button class="btn btn-danger" onclick="eliminarCircular(${c.id})" style="margin-top: 0.5rem;">🗑️ Eliminar</button>
+        </div>
+      `).join('');
+    }
+
+    function eliminarCircular(id) {
+      db.circulares = db.circulares.filter(c => c.id !== id);
+      guardarDatos();
+      renderizarCirculares();
+    }
+
+    // ==================== ACTIVIDADES ECONÓMICAS ====================
+    function agregarActividad() {
+      const a = {
+        id: Date.now(),
+        nombre: document.getElementById('nombreActividad').value,
+        fecha: document.getElementById('fechaActividad').value,
+        ingresos: parseFloat(document.getElementById('ingresosActividad').value) || 0,
+        egresos: parseFloat(document.getElementById('egresosActividad').value) || 0,
+        descripcion: document.getElementById('descActividad').value
+      };
+      
+      if(!a.nombre) {
+        alert('❌ El nombre es obligatorio');
+        return;
+      }
+      
+      if(actividadEditandoIdx !== null) {
+        db.actividades[actividadEditandoIdx] = a;
+        actividadEditandoIdx = null;
+      } else {
+        db.actividades.unshift(a);
+      }
+      guardarDatos();
+      renderizarActividades();
+      
+      ['nombreActividad', 'ingresosActividad', 'egresosActividad', 'descActividad'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+
+    function renderizarActividades() {
+      const cont = document.getElementById('listaActividades');
+      const resumen = document.getElementById('resumenFinanciero');
+      
+      if(db.actividades.length === 0) {
+        cont.innerHTML = '<p>No hay actividades registradas</p>';
+        resumen.innerHTML = '<p>Sin datos financieros</p>';
+        return;
+      }
+      
+      const totalIngresos = db.actividades.reduce((sum, a) => sum + a.ingresos, 0);
+      const totalEgresos = db.actividades.reduce((sum, a) => sum + a.egresos, 0);
+      const balance = totalIngresos - totalEgresos;
+      
+      resumen.innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center;">
+          <div class="card" style="background: #d4edda;">
+            <h4>Ingresos</h4>
+            <p style="font-size: 1.5rem; color: #27ae60;">$${totalIngresos.toFixed(2)}</p>
+          </div>
+          <div class="card" style="background: #f8d7da;">
+            <h4>Egresos</h4>
+            <p style="font-size: 1.5rem; color: #e74c3c;">$${totalEgresos.toFixed(2)}</p>
+          </div>
+          <div class="card" style="background: ${balance >= 0 ? '#d4edda' : '#f8d7da'};">
+            <h4>Balance</h4>
+            <p style="font-size: 1.5rem; color: ${balance >= 0 ? '#27ae60' : '#e74c3c'};">$${balance.toFixed(2)}</p>
+          </div>
+        </div>
+      `;
+      
+      cont.innerHTML = db.actividades.map((a, index) => `
+        <div class="evento-item">
+          <strong>${a.fecha}</strong> - ${a.nombre}
+          <p><strong>Ingresos:</strong> $${a.ingresos.toFixed(2)} | <strong>Egresos:</strong> $${a.egresos.toFixed(2)}</p>
+          <p>${a.descripcion}</p>
+          <button class="btn-icon" onclick="editarActividad(${index})" title="Editar">✏️</button> <button class="btn btn-danger" onclick="eliminarActividad(${a.id})" style="margin-top: 0.5rem;">🗑️ Eliminar</button>
+        </div>
+      `).join('');
+    }
+
+    function eliminarActividad(id) {
+      db.actividades = db.actividades.filter(a => a.id !== id);
+      guardarDatos();
+      renderizarActividades();
+    }
+
+    // ==================== INVENTARIO ====================
+    function agregarMaterial() {
+      const m = {
+        id: Date.now(),
+        nombre: document.getElementById('nombreMaterial').value,
+        cantidad: parseInt(document.getElementById('cantidadMaterial').value) || 1,
+        estado: document.getElementById('estadoMaterial').value,
+        ubicacion: document.getElementById('ubicacionMaterial').value,
+        observaciones: document.getElementById('obsMaterial').value
+      };
+      
+      if(!m.nombre) {
+        alert('❌ El nombre del material es obligatorio');
+        return;
+      }
+      
+      if(materialEditandoIdx !== null) {
+        db.inventario[materialEditandoIdx] = m;
+        materialEditandoIdx = null;
+      } else {
+        db.inventario.push(m);
+      }
+      guardarDatos();
+      renderizarInventario();
+      
+      ['nombreMaterial', 'ubicacionMaterial', 'obsMaterial'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('cantidadMaterial').value = '1';
+    }
+
+    function renderizarInventario() {
+      const cont = document.getElementById('listaInventario');
+      if(db.inventario.length === 0) {
+        cont.innerHTML = '<p>No hay materiales en el inventario</p>';
+        return;
+      }
+      
+      const estados = {bueno: '🟢 Bueno', regular: '🟡 Regular', malo: '🔴 Malo'};
+      
+      cont.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Cantidad</th>
+              <th>Estado</th>
+              <th>Ubicación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${db.inventario.map((m, index) => `
+              <tr>
+                <td>${m.nombre}</td>
+                <td>${m.cantidad}</td>
+                <td>${estados[m.estado]}</td>
+                <td>${m.ubicacion}</td>
+                <td>
+                  <button class="btn-icon" onclick="editarMaterial(${index})" title="Editar">✏️</button> <button class="btn btn-danger" onclick="eliminarMaterial(${m.id})">🗑️</button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function eliminarMaterial(id) {
+      db.inventario = db.inventario.filter(m => m.id !== id);
+      guardarDatos();
+      renderizarInventario();
+    }
+
+    // ==================== ASUNTOS VARIOS ====================
+    function agregarAsunto() {
+      const a = {
+        id: Date.now(),
+        fecha: document.getElementById('fechaAsunto').value,
+        titulo: document.getElementById('tituloAsunto').value,
+        prioridad: document.getElementById('prioridadAsunto').value,
+        descripcion: document.getElementById('descAsunto').value
+      };
+      
+      if(!a.titulo) {
+        alert('❌ El título es obligatorio');
+        return;
+      }
+      
+      if(asuntoEditandoIdx !== null) {
+        const idx = db.asuntos.findIndex(asunto => asunto.id === asuntoEditandoIdx);
+        if(idx !== -1) db.asuntos[idx] = a;
+        asuntoEditandoIdx = null;
+      } else {
+        db.asuntos.unshift(a);
+      }
+      guardarDatos();
+      renderizarAsuntos();
+      
+      document.getElementById('tituloAsunto').value = '';
+      document.getElementById('descAsunto').value = '';
+    }
+
+    function renderizarAsuntos() {
+      const cont = document.getElementById('listaAsuntos');
+      if(db.asuntos.length === 0) {
+        cont.innerHTML = '<p>No hay asuntos registrados</p>';
+        return;
+      }
+      
+      cont.innerHTML = db.asuntos.map(a => `
+        <div class="evento-item prioridad-${a.prioridad}">
+          <strong>${a.fecha}</strong> - ${a.titulo}
+          <span style="float: right; text-transform: uppercase; font-size: 0.8rem; padding: 0.2rem 0.5rem; border-radius: 5px; background: ${a.prioridad === 'alta' ? '#e74c3c' : a.prioridad === 'media' ? '#f39c12' : '#27ae60'}; color: white;">
+            ${a.prioridad}
+          </span>
+          <p style="margin-top: 0.5rem;">${a.descripcion}</p>
+          <button class="btn-icon" onclick="editarAsunto(${a.id})" title="Editar">✏️</button> <button class="btn btn-danger" onclick="eliminarAsunto(${a.id})" style="margin-top: 0.5rem;">🗑️ Eliminar</button>
+        </div>
+      `).join('');
+    }
+
+    function eliminarAsunto(id) {
+      db.asuntos = db.asuntos.filter(a => a.id !== id);
+      guardarDatos();
+      renderizarAsuntos();
+    }
+
+    // ==================== ESTADÍSTICAS ====================
+    function generarEstadisticas() {
+      const totalEstudiantes = Object.values(db.estudiantes).reduce((sum, arr) => sum + arr.length, 0);
+      const totalReuniones = db.reuniones.length;
+      const totalVisitas = db.visitas.length;
+      const totalActividades = db.actividades.length;
+      
+      document.getElementById('resumenEstadisticas').innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <div class="card" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h3>👥</h3>
+            <p style="font-size: 2rem; margin: 0;">${totalEstudiantes}</p>
+            <p>Estudiantes</p>
+          </div>
+          <div class="card" style="text-align: center; background: #4ECDC4; color: white;">
+            <h3>🤝</h3>
+            <p style="font-size: 2rem; margin: 0;">${totalReuniones}</p>
+            <p>Reuniones</p>
+          </div>
+          <div class="card" style="text-align: center; background: #FFEAA7; color: #333;">
+            <h3>🚗</h3>
+            <p style="font-size: 2rem; margin: 0;">${totalVisitas}</p>
+            <p>Visitas</p>
+          </div>
+          <div class="card" style="text-align: center; background: #85C1E2; color: white;">
+            <h3>💰</h3>
+            <p style="font-size: 2rem; margin: 0;">${totalActividades}</p>
+            <p>Actividades</p>
+          </div>
+        </div>
+      `;
+      
+      const nombres = {
+        prek: 'Pre-K', kinder: 'Kinder', '1grado': '1° Grado',
+        '2grado': '2° Grado', '3grado': '3° Grado', '4grado': '4° Grado',
+        '5grado': '5° Grado', '6grado': '6° Grado'
+      };
+      
+      document.getElementById('statsPorGrado').innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Grado</th>
+              <th>Estudiantes</th>
+              <th>% del total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${Object.keys(nombres).map(g => {
+              const count = db.estudiantes[g] ? db.estudiantes[g].length : 0;
+              const porcentaje = totalEstudiantes > 0 ? ((count / totalEstudiantes) * 100).toFixed(1) : 0;
+              return `
+                <tr>
+                  <td>${nombres[g]}</td>
+                  <td>${count}</td>
+                  <td>
+                    <div style="background: #e0e0e0; border-radius: 10px; overflow: hidden;">
+                      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: ${porcentaje}%; padding: 0.3rem; color: white; text-align: center; font-size: 0.8rem;">
+                        ${porcentaje}%
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    // ==================== BACKUP / RESTORE ====================
+    // ==================== HORARIO ====================
+    const HORARIO_FILAS = 10;
+    const HORARIO_DIAS = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
+
+    function renderizarHorario() {
+      // Inicializar horario si está vacío
+      if (!db.horario || db.horario.length === 0) {
+        db.horario = Array.from({ length: HORARIO_FILAS }, () => ({
+          hora: '',
+          lunes: '', martes: '', miercoles: '', jueves: '', viernes: ''
+        }));
+      }
+
+      const tbody = document.getElementById('horarioBody');
+      tbody.innerHTML = '';
+
+      db.horario.forEach((fila, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="hora-col"><input type="text" placeholder="7:00-7:45" value="${fila.hora}" 
+            oninput="guardarCeldaHorario(${i},'hora',this.value)"></td>
+          <td><input type="text" placeholder="Materia" value="${fila.lunes}" 
+            oninput="guardarCeldaHorario(${i},'lunes',this.value)"></td>
+          <td><input type="text" placeholder="Materia" value="${fila.martes}" 
+            oninput="guardarCeldaHorario(${i},'martes',this.value)"></td>
+          <td><input type="text" placeholder="Materia" value="${fila.miercoles}" 
+            oninput="guardarCeldaHorario(${i},'miercoles',this.value)"></td>
+          <td><input type="text" placeholder="Materia" value="${fila.jueves}" 
+            oninput="guardarCeldaHorario(${i},'jueves',this.value)"></td>
+          <td><input type="text" placeholder="Materia" value="${fila.viernes}" 
+            oninput="guardarCeldaHorario(${i},'viernes',this.value)"></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function guardarCeldaHorario(fila, campo, valor) {
+      if (!db.horario[fila]) return;
+      db.horario[fila][campo] = valor;
+      guardarDatos();
+    }
+
+    function limpiarHorario() {
+      if (!confirm('¿Limpiar todo el horario? Esta acción no se puede deshacer.')) return;
+      db.horario = Array.from({ length: HORARIO_FILAS }, () => ({
+        hora: '', lunes: '', martes: '', miercoles: '', jueves: '', viernes: ''
+      }));
+      guardarDatos();
+      renderizarHorario();
+    }
+
+    function actualizarStatsBackup() {
+      const totalEstudiantes = Object.values(db.estudiantes).reduce((sum, arr) => sum + arr.length, 0);
+      const totalEventos = Object.keys(db.eventos).length;
+      
+      document.getElementById('backupStats').innerHTML = `
+        <div class="stat-box">
+          <h4>👥 Estudiantes</h4>
+          <p>${totalEstudiantes}</p>
+        </div>
+        <div class="stat-box">
+          <h4>📅 Eventos</h4>
+          <p>${totalEventos}</p>
+        </div>
+        <div class="stat-box">
+          <h4>🤝 Reuniones</h4>
+          <p>${db.reuniones.length}</p>
+        </div>
+        <div class="stat-box">
+          <h4>📋 Asuntos</h4>
+          <p>${db.asuntos.length}</p>
+        </div>
+        <div class="stat-box">
+          <h4>💰 Actividades</h4>
+          <p>${db.actividades.length}</p>
+        </div>
+        <div class="stat-box">
+          <h4>📦 Inventario</h4>
+          <p>${db.inventario.length}</p>
+        </div>
+      `;
+      
+      const guardado = localStorage.getItem('cuadernoDocente2026');
+      if(guardado) {
+        const fecha = new Date(JSON.parse(guardado).fechaCreacion || Date.now());
+        document.getElementById('ultimaModificacion').textContent = fecha.toLocaleString('es-PA');
+      }
+    }
+
+    function exportarBackup() {
+      db.fechaCreacion = new Date().toISOString();
+      db.version = '1.0';
+      
+      const dataStr = JSON.stringify(db, null, 2);
+      const dataBlob = new Blob([dataStr], {type: 'application/json'});
+      
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `cuaderno_backup_${db.datosDocente.docente.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      mostrarMensajeBackup('✅ Backup descargado correctamente', 'success', 'mensajeExportar');
+    }
+
+    async function copiarAlPortapapeles() {
+      try {
+        db.fechaCreacion = new Date().toISOString();
+        const dataStr = JSON.stringify(db);
+        await navigator.clipboard.writeText(dataStr);
+        mostrarMensajeBackup('📋 Datos copiados al portapapeles. Pégalo donde quieras guardarlo.', 'success', 'mensajeExportar');
+      } catch(err) {
+        mostrarMensajeBackup('❌ Error al copiar. Intenta descargar el archivo en su lugar.', 'error', 'mensajeExportar');
+      }
+    }
+
+    function inicializarBackupDropZone() {
+      const dropZone = document.getElementById('backupDropZone');
+      if(!dropZone) return;
+      
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      });
+      
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+      });
+      
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if(files.length) procesarBackup(files[0]);
+      });
+    }
+
+    function procesarBackup(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const backup = JSON.parse(e.target.result);
+          mostrarPreviewBackup(backup);
+        } catch(err) {
+          mostrarMensajeBackup('❌ Error: El archivo no es un backup válido', 'error', 'mensajeRestaurar');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function restaurarDesdeTexto() {
+      const texto = document.getElementById('backupTextArea').value.trim();
+      if(!texto) {
+        mostrarMensajeBackup('❌ Pega el contenido del backup primero', 'error', 'mensajeRestaurar');
+        return;
+      }
+      
+      try {
+        const backup = JSON.parse(texto);
+        mostrarPreviewBackup(backup);
+      } catch(err) {
+        mostrarMensajeBackup('❌ Error: El texto no es un backup válido', 'error', 'mensajeRestaurar');
+      }
+    }
+
+    function mostrarPreviewBackup(backup) {
+      if(!backup.datosDocente || !backup.estudiantes) {
+        mostrarMensajeBackup('❌ Error: Estructura de backup inválida', 'error', 'mensajeRestaurar');
+        return;
+      }
+      
+      backupPendiente = backup;
+      
+      const totalEst = Object.values(backup.estudiantes).reduce((sum, arr) => sum + arr.length, 0);
+      const totalEventos = Object.keys(backup.eventos || {}).length;
+      
+      document.getElementById('previewStats').innerHTML = `
+        <div class="stat-box">
+          <h4>Docente</h4>
+          <p style="font-size: 1rem;">${backup.datosDocente.docente}</p>
+        </div>
+        <div class="stat-box">
+          <h4>Estudiantes</h4>
+          <p>${totalEst}</p>
+        </div>
+        <div class="stat-box">
+          <h4>Eventos</h4>
+          <p>${totalEventos}</p>
+        </div>
+        <div class="stat-box">
+          <h4>Fecha backup</h4>
+          <p style="font-size: 0.9rem;">${new Date(backup.fechaCreacion).toLocaleDateString('es-PA')}</p>
+        </div>
+      `;
+      
+      const previewText = JSON.stringify(backup, null, 2).substring(0, 2000) + '...';
+      document.getElementById('previewContenido').textContent = previewText;
+      
+      document.getElementById('previewBackupCard').classList.remove('hidden');
+      document.getElementById('mensajeRestaurar').classList.add('hidden');
+    }
+
+    function confirmarRestauracion() {
+      if(!backupPendiente) return;
+      
+      if(!confirm('⚠️ ¿Estás seguro? Esto reemplazará TODOS tus datos actuales.\n\nRecomendación: Exporta tu backup actual primero si no lo has hecho.')) {
+        return;
+      }
+      
+      db = backupPendiente;
+      guardarDatos();
+      
+      // Sincronizar todos los campos editables
+      document.getElementById('tituloCuaderno').textContent = db.datosDocente.titulo;
+      document.getElementById('anioEscolar').textContent = db.datosDocente.anio;
+      document.getElementById('nombreDocente').textContent = db.datosDocente.docente;
+      document.getElementById('nombreEscuela').textContent = db.datosDocente.escuela;
+      document.getElementById('gradoEscolar').textContent = db.datosDocente.grado;
+      
+      document.getElementById('tituloPortada').textContent = db.datosDocente.titulo;
+      document.getElementById('anioPortada').textContent = db.datosDocente.anio;
+      document.getElementById('docentePortada').textContent = db.datosDocente.docente;
+      document.getElementById('escuelaPortada').textContent = db.datosDocente.escuela;
+      document.getElementById('gradoPortada').textContent = db.datosDocente.grado;
+      
+      generarCalendario();
+      actualizarContadores();
+      actualizarStatsBackup();
+      
+      document.getElementById('previewBackupCard').classList.add('hidden');
+      document.getElementById('backupTextArea').value = '';
+      backupPendiente = null;
+      
+      mostrarMensajeBackup('✅ Datos restaurados correctamente. La página se recargará...', 'success', 'mensajeRestaurar');
+      
+      setTimeout(() => location.reload(), 2000);
+    }
+
+    function cancelarRestauracion() {
+      backupPendiente = null;
+      document.getElementById('previewBackupCard').classList.add('hidden');
+      document.getElementById('backupTextArea').value = '';
+    }
+
+    function mostrarMensajeBackup(mensaje, tipo, elementoId) {
+      const el = document.getElementById(elementoId);
+      el.textContent = mensaje;
+      el.className = `backup-status backup-${tipo}`;
+      el.classList.remove('hidden');
+      
+      setTimeout(() => {
+        el.classList.add('hidden');
+      }, 5000);
+    }
+
+    // ==================== UTILIDADES ====================
+    function descargarArchivo(contenido, nombre, tipo) {
+      const blob = new Blob([contenido], {type: tipo});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = nombre;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function mostrarMensaje(mensaje, tipo) {
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${tipo === 'success' ? '#27ae60' : '#e74c3c'};
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10000;
+        font-weight: bold;
+        animation: slideIn 0.3s ease;
+      `;
+      toast.textContent = mensaje;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // ==================== PDF ====================
+    function mostrarSelectorPDF() {
+      const opciones = [
+        {id: 'datos', label: 'Datos del Docente'},
+        {id: 'calendario', label: 'Calendario'},
+        {id: 'estudiantes', label: 'Lista de Estudiantes'},
+        {id: 'asistencia', label: 'Registro de Asistencia'},
+        {id: 'reuniones', label: 'Reuniones'},
+        {id: 'comisiones', label: 'Comisiones'},
+        {id: 'visitas', label: 'Visitas'},
+        {id: 'permisos', label: 'Permisos'},
+        {id: 'circulares', label: 'Circulares'},
+        {id: 'actividades', label: 'Actividades Económicas'},
+        {id: 'inventario', label: 'Inventario'},
+        {id: 'asuntos', label: 'Asuntos Varios'}
+      ];
+      
+      document.getElementById('pdfOptions').innerHTML = opciones.map(o => `
+        <div class="pdf-option">
+          <input type="checkbox" id="pdf-${o.id}" value="${o.id}" checked>
+          <label for="pdf-${o.id}">${o.label}</label>
+        </div>
+      `).join('');
+      
+      document.getElementById('pdfSelector').classList.add('active');
+    }
+
+    function cerrarSelectorPDF() {
+      document.getElementById('pdfSelector').classList.remove('active');
+    }
+
+    function generarPDF() {
+      const seleccionados = Array.from(document.querySelectorAll('#pdfOptions input:checked')).map(c => c.value);
+      
+      if(seleccionados.length === 0) {
+        alert('⚠️ Selecciona al menos una sección para exportar');
+        return;
+      }
+      
+      let contenido = `
+        <h1>${db.datosDocente.titulo} - ${db.datosDocente.anio}</h1>
+        <p><strong>Docente:</strong> ${db.datosDocente.docente}</p>
+        <p><strong>Centro Educativo:</strong> ${db.datosDocente.escuela}</p>
+        <p><strong>Grado:</strong> ${db.datosDocente.grado}</p>
+        <p><strong>Fecha de exportación:</strong> ${new Date().toLocaleDateString('es-PA')}</p>
+        <hr>
+      `;
+      
+      // CALENDARIO / EVENTOS
+      if(seleccionados.includes('calendario')) {
+        const eventos = [];
+        Object.keys(db.eventos || {}).sort().forEach(fecha => {
+          db.eventos[fecha].forEach(e => eventos.push({...e, fecha}));
+        });
+        
+        if(eventos.length > 0) {
+          contenido += '<h2>📅 Calendario de Eventos</h2>';
+          contenido += '<table style="width:100%; border-collapse: collapse; margin-bottom: 2rem;"><thead><tr style="background: #667eea; color: white;"><th style="padding: 8px; border: 1px solid #ddd;">Fecha</th><th style="padding: 8px; border: 1px solid #ddd;">Título</th><th style="padding: 8px; border: 1px solid #ddd;">Descripción</th><th style="padding: 8px; border: 1px solid #ddd;">Tipo</th></tr></thead><tbody>';
+          eventos.forEach(e => {
+            contenido += `<tr><td style="padding: 8px; border: 1px solid #ddd;">${e.fecha}</td><td style="padding: 8px; border: 1px solid #ddd;">${e.titulo}</td><td style="padding: 8px; border: 1px solid #ddd;">${e.descripcion || '-'}</td><td style="padding: 8px; border: 1px solid #ddd;">${e.tipo}</td></tr>`;
+          });
+          contenido += '</tbody></table>';
+        } else {
+          contenido += '<h2>📅 Calendario de Eventos</h2><p><em>No hay eventos registrados.</em></p>';
+        }
+      }
+      
+      // ESTUDIANTES
+      if(seleccionados.includes('estudiantes')) {
+        contenido += '<h2>👥 Lista de Estudiantes</h2>';
+        let hayEstudiantes = false;
+        Object.keys(db.estudiantes).forEach(g => {
+          if(db.estudiantes[g].length > 0) {
+            hayEstudiantes = true;
+            const nombres = {prek: 'Pre-K', kinder: 'Kinder', '1grado': '1°', '2grado': '2°', '3grado': '3°', '4grado': '4°', '5grado': '5°', '6grado': '6°'};
+            contenido += `<h3>${nombres[g] || g}</h3><ul>`;
+            db.estudiantes[g].forEach(e => {
+              contenido += `<li>${e.nombre} - ${e.cedula}</li>`;
+            });
+            contenido += '</ul>';
+          }
+        });
+        if(!hayEstudiantes) contenido += '<p><em>No hay estudiantes registrados.</em></p>';
+      }
+      
+      // ASISTENCIA
+      if(seleccionados.includes('asistencia')) {
+        const registros = Object.keys(db.asistencia || {}).sort().reverse().slice(0, 50);
+        
+        if(registros.length > 0) {
+          contenido += '<h2>📋 Registro de Asistencia (Últimos 50)</h2>';
+          contenido += '<table style="width:100%; border-collapse: collapse; margin-bottom: 2rem; font-size: 0.9em;"><thead><tr style="background: #667eea; color: white;"><th style="padding: 6px; border: 1px solid #ddd;">Fecha</th><th style="padding: 6px; border: 1px solid #ddd;">Grado</th><th style="padding: 6px; border: 1px solid #ddd;">Presentes</th><th style="padding: 6px; border: 1px solid #ddd;">Ausentes</th><th style="padding: 6px; border: 1px solid #ddd;">Tardanzas</th></tr></thead><tbody>';
+          
+          registros.forEach(key => {
+            const [grado, fecha] = key.split('_');
+            const asist = db.asistencia[key];
+            const nombres = {prek: 'Pre-K', kinder: 'Kinder', '1grado': '1°', '2grado': '2°', '3grado': '3°', '4grado': '4°', '5grado': '5°', '6grado': '6°'};
+            let p = 0, a = 0, t = 0;
+            Object.values(asist).forEach(v => {
+              if(v === 'P') p++;
+              else if(v === 'A') a++;
+              else if(v === 'T') t++;
+            });
+            contenido += `<tr><td style="padding: 6px; border: 1px solid #ddd;">${fecha}</td><td style="padding: 6px; border: 1px solid #ddd;">${nombres[grado] || grado}</td><td style="padding: 6px; border: 1px solid #ddd; color: green;">${p}</td><td style="padding: 6px; border: 1px solid #ddd; color: red;">${a}</td><td style="padding: 6px; border: 1px solid #ddd; color: orange;">${t}</td></tr>`;
+          });
+          contenido += '</tbody></table>';
+        } else {
+          contenido += '<h2>📋 Registro de Asistencia</h2><p><em>No hay registros de asistencia.</em></p>';
+        }
+      }
+      
+      // REUNIONES
+      if(seleccionados.includes('reuniones')) {
+        if(db.reuniones && db.reuniones.length > 0) {
+          contenido += '<h2>🤝 Reuniones</h2>';
+          contenido += '<table style="width:100%; border-collapse: collapse; margin-bottom: 2rem;"><thead><tr style="background: #667eea; color: white;"><th style="padding: 8px; border: 1px solid #ddd;">Fecha</th><th style="padding: 8px; border: 1px solid #ddd;">Tema</th><th style="padding: 8px; border: 1px solid #ddd;">Participantes</th><th style="padding: 8px; border: 1px solid #ddd;">Acuerdos</th></tr></thead><tbody>';
+          db.reuniones.forEach(r => {
+            contenido += `<tr><td style="padding: 8px; border: 1px solid #ddd;">${r.fecha}</td><td style="padding: 8px; border: 1px solid #ddd;">${r.tema}</td><td style="padding: 8px; border: 1px solid #ddd;">${r.participantes}</td><td style="padding: 8px; border: 1px solid #ddd;">${r.acuerdos}</td></tr>`;
+          });
+          contenido += '</tbody></table>';
+        } else {
+          contenido += '<h2>🤝 Reuniones</h2><p><em>No hay reuniones registradas.</em></p>';
+        }
+      }
+      
+      // COMISIONES
+      if(seleccionados.includes('comisiones')) {
+        if(db.comisiones && db.comisiones.length > 0) {
+          contenido += '<h2>👥 Comisiones</h2>';
+          db.comisiones.forEach(c => {
+            contenido += `<div style="margin-bottom: 1rem; padding: 1rem; border: 1px solid #ddd; border-radius: 5px;"><h3 style="color: #667eea; margin-top: 0;">${c.nombre}</h3><p><strong>Integrantes:</strong> ${c.integrantes}</p><p><strong>Funciones:</strong> ${c.funciones}</p></div>`;
+          });
+        } else {
+          contenido += '<h2>👥 Comisiones</h2><p><em>No hay comisiones registradas.</em></p>';
+        }
+      }
+      
+      // VISITAS
+      if(seleccionados.includes('visitas')) {
+        if(db.visitas && db.visitas.length > 0) {
+          contenido += '<h2>🚗 Visitas de Estudio</h2>';
+          contenido += '<table style="width:100%; border-collapse: collapse; margin-bottom: 2rem;"><thead><tr style="background: #667eea; color: white;"><th style="padding: 8px; border: 1px solid #ddd;">Fecha</th><th style="padding: 8px; border: 1px solid #ddd;">Lugar</th><th style="padding: 8px; border: 1px solid #ddd;">Grado</th><th style="padding: 8px; border: 1px solid #ddd;">Estudiantes</th><th style="padding: 8px; border: 1px solid #ddd;">Responsables</th></tr></thead><tbody>';
+          db.visitas.forEach(v => {
+            contenido += `<tr><td style="padding: 8px; border: 1px solid #ddd;">${v.fecha}</td><td style="padding: 8px; border: 1px solid #ddd;">${v.lugar}</td><td style="padding: 8px; border: 1px solid #ddd;">${v.grado}</td><td style="padding: 8px; border: 1px solid #ddd;">${v.cantidad}</td><td style="padding: 8px; border: 1px solid #ddd;">${v.responsables}</td></tr>`;
+          });
+          contenido += '</tbody></table>';
+        } else {
+          contenido += '<h2>🚗 Visitas de Estudio</h2><p><em>No hay visitas registradas.</em></p>';
+        }
+      }
+      
+      // PERMISOS
+      if(seleccionados.includes('permisos')) {
+        if(db.permisos && db.permisos.length > 0) {
+          contenido += '<h2>📝 Permisos</h2>';
+          contenido += '<table style="width:100%; border-collapse: collapse; margin-bottom: 2rem;"><thead><tr style="background: #667eea; color: white;"><th style="padding: 8px; border: 1px solid #ddd;">Tipo</th><th style="padding: 8px; border: 1px solid #ddd;">Inicio</th><th style="padding: 8px; border: 1px solid #ddd;">Fin</th><th style="padding: 8px; border: 1px solid #ddd;">Motivo</th></tr></thead><tbody>';
+          db.permisos.forEach(p => {
+            contenido += `<tr><td style="padding: 8px; border: 1px solid #ddd;">${p.tipo}</td><td style="padding: 8px; border: 1px solid #ddd;">${p.fechaInicio}</td><td style="padding: 8px; border: 1px solid #ddd;">${p.fechaFin}</td><td style="padding: 8px; border: 1px solid #ddd;">${p.motivo}</td></tr>`;
+          });
+          contenido += '</tbody></table>';
+        } else {
+          contenido += '<h2>📝 Permisos</h2><p><em>No hay permisos registrados.</em></p>';
+        }
+      }
+      
+      // CIRCULARES
+      if(seleccionados.includes('circulares')) {
+        if(db.circulares && db.circulares.length > 0) {
+          contenido += '<h2>📄 Circulares</h2>';
+          db.circulares.forEach(c => {
+            contenido += `<div style="margin-bottom: 1rem; padding: 1rem; border: 1px solid #ddd; border-radius: 5px;"><p><strong>Fecha:</strong> ${c.fecha} | <strong>N°:</strong> ${c.numero}</p><p><strong>Asunto:</strong> ${c.asunto}</p><p><strong>Destinatarios:</strong> ${c.destinatarios}</p><p><strong>Contenido:</strong> ${c.contenido}</p></div>`;
+          });
+        } else {
+          contenido += '<h2>📄 Circulares</h2><p><em>No hay circulares registradas.</em></p>';
+        }
+      }
+      
+      // ACTIVIDADES ECONÓMICAS
+      if(seleccionados.includes('actividades')) {
+        if(db.actividades && db.actividades.length > 0) {
+          contenido += '<h2>💰 Actividades Económicas</h2>';
+          contenido += '<table style="width:100%; border-collapse: collapse; margin-bottom: 2rem;"><thead><tr style="background: #667eea; color: white;"><th style="padding: 8px; border: 1px solid #ddd;">Fecha</th><th style="padding: 8px; border: 1px solid #ddd;">Actividad</th><th style="padding: 8px; border: 1px solid #ddd;">Ingresos</th><th style="padding: 8px; border: 1px solid #ddd;">Egresos</th><th style="padding: 8px; border: 1px solid #ddd;">Balance</th></tr></thead><tbody>';
+          let totalIngresos = 0, totalEgresos = 0;
+          db.actividades.forEach(a => {
+            const ingresos = parseFloat(a.ingresos) || 0;
+            const egresos = parseFloat(a.egresos) || 0;
+            const balance = ingresos - egresos;
+            totalIngresos += ingresos;
+            totalEgresos += egresos;
+            contenido += `<tr><td style="padding: 8px; border: 1px solid #ddd;">${a.fecha}</td><td style="padding: 8px; border: 1px solid #ddd;">${a.nombre}</td><td style="padding: 8px; border: 1px solid #ddd; color: green;">$${ingresos.toFixed(2)}</td><td style="padding: 8px; border: 1px solid #ddd; color: red;">$${egresos.toFixed(2)}</td><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${balance >= 0 ? '+' : ''}$${balance.toFixed(2)}</td></tr>`;
+          });
+          const balanceTotal = totalIngresos - totalEgresos;
+          contenido += `<tr style="background: #f0f0f0; font-weight: bold;"><td colspan="2">TOTAL</td><td style="padding: 8px; border: 1px solid #ddd; color: green;">$${totalIngresos.toFixed(2)}</td><td style="padding: 8px; border: 1px solid #ddd; color: red;">$${totalEgresos.toFixed(2)}</td><td style="padding: 8px; border: 1px solid #ddd;">${balanceTotal >= 0 ? '+' : ''}$${balanceTotal.toFixed(2)}</td></tr>`;
+          contenido += '</tbody></table>';
+        } else {
+          contenido += '<h2>💰 Actividades Económicas</h2><p><em>No hay actividades registradas.</em></p>';
+        }
+      }
+      
+      // INVENTARIO
+      if(seleccionados.includes('inventario')) {
+        if(db.inventario && db.inventario.length > 0) {
+          contenido += '<h2>📦 Inventario de Materiales</h2>';
+          contenido += '<table style="width:100%; border-collapse: collapse; margin-bottom: 2rem;"><thead><tr style="background: #667eea; color: white;"><th style="padding: 8px; border: 1px solid #ddd;">Material</th><th style="padding: 8px; border: 1px solid #ddd;">Cantidad</th><th style="padding: 8px; border: 1px solid #ddd;">Estado</th><th style="padding: 8px; border: 1px solid #ddd;">Ubicación</th></tr></thead><tbody>';
+          db.inventario.forEach(m => {
+            const colorEstado = m.estado === 'bueno' ? 'green' : m.estado === 'regular' ? 'orange' : 'red';
+            contenido += `<tr><td style="padding: 8px; border: 1px solid #ddd;">${m.nombre}</td><td style="padding: 8px; border: 1px solid #ddd;">${m.cantidad}</td><td style="padding: 8px; border: 1px solid #ddd; color: ${colorEstado};">${m.estado}</td><td style="padding: 8px; border: 1px solid #ddd;">${m.ubicacion}</td></tr>`;
+          });
+          contenido += '</tbody></table>';
+        } else {
+          contenido += '<h2>📦 Inventario de Materiales</h2><p><em>No hay materiales en inventario.</em></p>';
+        }
+      }
+      
+      // ASUNTOS VARIOS
+      if(seleccionados.includes('asuntos')) {
+        if(db.asuntos && db.asuntos.length > 0) {
+          contenido += '<h2>📋 Asuntos Varios</h2>';
+          db.asuntos.forEach(a => {
+            const colorPrioridad = a.prioridad === 'alta' ? 'red' : a.prioridad === 'media' ? 'orange' : 'green';
+            contenido += `<div style="margin-bottom: 1rem; padding: 1rem; border-left: 4px solid ${colorPrioridad}; background: #f9f9f9;"><p style="margin: 0;"><strong>${a.titulo}</strong> <span style="color: ${colorPrioridad};">● ${a.prioridad.toUpperCase()}</span></p><p style="margin: 0.5rem 0; color: #666; font-size: 0.9em;">${a.fecha}</p><p style="margin: 0;">${a.descripcion}</p></div>`;
+          });
+        } else {
+          contenido += '<h2>📋 Asuntos Varios</h2><p><em>No hay asuntos pendientes.</em></p>';
+        }
+      }
+      
+      // Footer del documento
+      contenido += `<div style="margin-top: 3rem; padding-top: 1rem; border-top: 2px solid #ddd; color: #666; font-size: 0.9em;"><p><strong>Cuaderno Único Docente 2026</strong></p><p>Documento generado el ${new Date().toLocaleDateString('es-PA')} a las ${new Date().toLocaleTimeString('es-PA')}</p><p>Secciones incluidas: ${seleccionados.length}</p></div>`;
+      
+      const ventana = window.open('', '_blank');
+      ventana.document.write(`
+        <html>
+          <head>
+            <meta charset="UTF-8">
+            <title>Cuaderno Docente - ${db.datosDocente.docente}</title>
+            <style>
+              @media print {
+                body { margin: 0; }
+                @page { margin: 1.5cm; }
+              }
+              body { 
+                font-family: Arial, sans-serif; 
+                padding: 2rem; 
+                max-width: 1200px; 
+                margin: 0 auto;
+                line-height: 1.6;
+              }
+              h1 { 
+                color: #667eea; 
+                border-bottom: 3px solid #667eea; 
+                padding-bottom: 0.5rem;
+              }
+              h2 { 
+                color: #764ba2; 
+                border-bottom: 2px solid #764ba2; 
+                padding-bottom: 0.5rem; 
+                margin-top: 2rem;
+                page-break-before: auto;
+              }
+              h3 { color: #555; }
+              table { 
+                border-collapse: collapse; 
+                width: 100%; 
+                margin: 1rem 0;
+                page-break-inside: avoid;
+              }
+              th, td { 
+                padding: 8px; 
+                border: 1px solid #ddd; 
+                text-align: left;
+              }
+              th { 
+                background: #667eea; 
+                color: white; 
+                font-weight: bold;
+              }
+              tr:nth-child(even) { background: #f9f9f9; }
+            </style>
+          </head>
+          <body>${contenido}</body>
+        </html>
+      `);
+      ventana.document.close();
+      
+      setTimeout(() => {
+        ventana.print();
+      }, 500);
+      
+      cerrarSelectorPDF();
+      alert(`✅ PDF generado con ${seleccionados.length} sección(es)`);
+    }
+
+    // ==================== LOCALSTORAGE ====================
+    function guardarDatos() {
+      db.fechaCreacion = new Date().toISOString();
+      localStorage.setItem('cuadernoDocente2026', JSON.stringify(db));
+    }
+
+    function cargarDatos() {
+      const guardado = localStorage.getItem('cuadernoDocente2026');
+      if(guardado) {
+        db = JSON.parse(guardado);
+        
+        if(!db.asuntos) db.asuntos = [];
+        if(!db.inventario) db.inventario = [];
+        if(!db.actividades) db.actividades = [];
+        if(!db.datosDocente) {
+          db.datosDocente = {
+            titulo: 'Cuaderno Único Docente',
+            anio: '2026',
+            docente: 'José R. White',
+            escuela: '..........................................................',
+            grado: '........................................'
+          };
+        }
+        
+        // Sincronizar header principal
+        document.getElementById('tituloCuaderno').textContent = db.datosDocente.titulo;
+        document.getElementById('anioEscolar').textContent = db.datosDocente.anio;
+        document.getElementById('nombreDocente').textContent = db.datosDocente.docente;
+        document.getElementById('nombreEscuela').textContent = db.datosDocente.escuela;
+        document.getElementById('gradoEscolar').textContent = db.datosDocente.grado;
+        
+        // Sincronizar portada
+        document.getElementById('tituloPortada').textContent = db.datosDocente.titulo;
+        document.getElementById('anioPortada').textContent = db.datosDocente.anio;
+        document.getElementById('docentePortada').textContent = db.datosDocente.docente;
+        document.getElementById('escuelaPortada').textContent = db.datosDocente.escuela;
+        document.getElementById('gradoPortada').textContent = db.datosDocente.grado;
+      }
+      
+      // Ocultar header principal y nav al inicio (solo portada visible)
+      document.getElementById('mainHeader').style.display = 'none';
+      document.getElementById('mainNav').classList.remove('visible');
+    }
+    
+    // ==================== FASE 2: BÚSQUEDA GLOBAL Y EXPORTACIÓN ====================
+    // ==================== EDICIÓN GLOBAL - TODAS LAS SECCIONES ====================
+// ==================== BÚSQUEDA GLOBAL ====================
+// ==================== EXPORTACIÓN SELECTIVA ====================
+
+// Exportar Eventos a Excel
+function exportarEventosExcel() {
+  const eventos = [];
+  Object.keys(db.eventos || {}).sort().forEach(fecha => {
+    db.eventos[fecha].forEach(e => {
+      eventos.push({
+        fecha: fecha,
+        titulo: e.titulo,
+        descripcion: e.descripcion || '',
+        tipo: e.tipo
+      });
+    });
+  });
+  
+  if(eventos.length === 0) {
+    alert('No hay eventos para exportar');
+    return;
+  }
+  
+  let csv = 'Fecha,Título,Descripción,Tipo\n';
+  eventos.forEach(e => {
+    csv += `"${e.fecha}","${e.titulo}","${e.descripcion}","${e.tipo}"\n`;
+  });
+  
+  descargarCSV(csv, `eventos_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${eventos.length} eventos exportados a Excel`);
+}
+
+// Exportar Reuniones a Excel
+function exportarReunionesExcel() {
+  if(!db.reuniones || db.reuniones.length === 0) {
+    alert('No hay reuniones para exportar');
+    return;
+  }
+  
+  let csv = 'Fecha,Tema,Participantes,Acuerdos\n';
+  db.reuniones.forEach(r => {
+    csv += `"${r.fecha}","${r.tema}","${r.participantes}","${r.acuerdos}"\n`;
+  });
+  
+  descargarCSV(csv, `reuniones_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${db.reuniones.length} reuniones exportadas`);
+}
+
+// Exportar Comisiones a Excel
+function exportarComisionesExcel() {
+  if(!db.comisiones || db.comisiones.length === 0) {
+    alert('No hay comisiones para exportar');
+    return;
+  }
+  
+  let csv = 'Nombre,Integrantes,Funciones\n';
+  db.comisiones.forEach(c => {
+    csv += `"${c.nombre}","${c.integrantes}","${c.funciones}"\n`;
+  });
+  
+  descargarCSV(csv, `comisiones_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${db.comisiones.length} comisiones exportadas`);
+}
+
+// Exportar Visitas a Excel
+function exportarVisitasExcel() {
+  if(!db.visitas || db.visitas.length === 0) {
+    alert('No hay visitas para exportar');
+    return;
+  }
+  
+  let csv = 'Fecha,Lugar,Grado,Cantidad,Responsables,Observaciones\n';
+  db.visitas.forEach(v => {
+    csv += `"${v.fecha}","${v.lugar}","${v.grado}","${v.cantidad}","${v.responsables}","${v.observaciones}"\n`;
+  });
+  
+  descargarCSV(csv, `visitas_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${db.visitas.length} visitas exportadas`);
+}
+
+// Exportar Permisos a Excel
+function exportarPermisosExcel() {
+  if(!db.permisos || db.permisos.length === 0) {
+    alert('No hay permisos para exportar');
+    return;
+  }
+  
+  let csv = 'Tipo,Fecha Inicio,Fecha Fin,Motivo,Observaciones\n';
+  db.permisos.forEach(p => {
+    csv += `"${p.tipo}","${p.fechaInicio}","${p.fechaFin}","${p.motivo}","${p.observaciones}"\n`;
+  });
+  
+  descargarCSV(csv, `permisos_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${db.permisos.length} permisos exportados`);
+}
+
+// Exportar Circulares a Excel
+function exportarCircularesExcel() {
+  if(!db.circulares || db.circulares.length === 0) {
+    alert('No hay circulares para exportar');
+    return;
+  }
+  
+  let csv = 'Fecha,Número,Asunto,Destinatarios,Contenido\n';
+  db.circulares.forEach(c => {
+    csv += `"${c.fecha}","${c.numero}","${c.asunto}","${c.destinatarios}","${c.contenido}"\n`;
+  });
+  
+  descargarCSV(csv, `circulares_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${db.circulares.length} circulares exportadas`);
+}
+
+// Exportar Actividades a Excel
+function exportarActividadesExcel() {
+  if(!db.actividades || db.actividades.length === 0) {
+    alert('No hay actividades para exportar');
+    return;
+  }
+  
+  let csv = 'Fecha,Nombre,Ingresos,Egresos,Descripción\n';
+  db.actividades.forEach(a => {
+    csv += `"${a.fecha}","${a.nombre}","${a.ingresos}","${a.egresos}","${a.descripcion}"\n`;
+  });
+  
+  descargarCSV(csv, `actividades_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${db.actividades.length} actividades exportadas`);
+}
+
+// Exportar Inventario a Excel
+function exportarInventarioExcel() {
+  if(!db.inventario || db.inventario.length === 0) {
+    alert('No hay materiales para exportar');
+    return;
+  }
+  
+  let csv = 'Nombre,Cantidad,Estado,Ubicación,Observaciones\n';
+  db.inventario.forEach(m => {
+    csv += `"${m.nombre}","${m.cantidad}","${m.estado}","${m.ubicacion}","${m.observaciones}"\n`;
+  });
+  
+  descargarCSV(csv, `inventario_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${db.inventario.length} materiales exportados`);
+}
+
+// Exportar Asuntos a Excel
+function exportarAsuntosExcel() {
+  if(!db.asuntos || db.asuntos.length === 0) {
+    alert('No hay asuntos para exportar');
+    return;
+  }
+  
+  let csv = 'Fecha,Título,Prioridad,Descripción\n';
+  db.asuntos.forEach(a => {
+    csv += `"${a.fecha}","${a.titulo}","${a.prioridad}","${a.descripcion}"\n`;
+  });
+  
+  descargarCSV(csv, `asuntos_${new Date().toISOString().split('T')[0]}.csv`);
+  alert(`✅ ${db.asuntos.length} asuntos exportados`);
+}
+
+// Función helper para descargar CSV
+function descargarCSV(contenido, nombreArchivo) {
+  const BOM = '\uFEFF'; // Para que Excel reconozca UTF-8
+  const blob = new Blob([BOM + contenido], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = nombreArchivo;
+  link.click();
+}
+
+// Exportar sección a PDF (genera HTML formateado)
+function exportarSeccionPDF(seccion, titulo) {
+  let contenido = '';
+  const fecha = new Date().toLocaleDateString('es-PA');
+  
+  contenido += `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>${titulo}</title>
+      <style>
+        body { font-family: Arial, sans-serif; margin: 2cm; }
+        h1 { color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        h2 { color: #444; margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #667eea; color: white; padding: 10px; text-align: left; }
+        td { border: 1px solid #ddd; padding: 8px; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .footer { margin-top: 50px; color: #999; font-size: 0.9em; border-top: 1px solid #ddd; padding-top: 10px; }
+      </style>
+    </head>
+    <body>
+      <h1>📚 Cuaderno Único Docente 2026</h1>
+      <h2>${titulo}</h2>
+      <p><strong>Fecha de exportación:</strong> ${fecha}</p>
+      <p><strong>Docente:</strong> ${db.datosDocente?.docente || 'José R. White'}</p>
+  `;
+  
+  // Generar contenido según sección
+  switch(seccion) {
+    case 'eventos':
+      contenido += generarTablaEventosPDF();
+      break;
+    case 'reuniones':
+      contenido += generarTablaReunionesPDF();
+      break;
+    // ... otras secciones
+  }
+  
+  contenido += `
+      <div class="footer">
+        <p>Documento generado automáticamente por Cuaderno Único Docente</p>
+        <p>Total de registros: ${contarRegistros(seccion)}</p>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  // Abrir en nueva ventana para imprimir/guardar como PDF
+  const ventana = window.open('', '_blank');
+  ventana.document.write(contenido);
+  ventana.document.close();
+  
+  setTimeout(() => {
+    ventana.print();
+  }, 500);
+}
+
+function generarTablaEventosPDF() {
+  let html = '<table><thead><tr><th>Fecha</th><th>Título</th><th>Descripción</th><th>Tipo</th></tr></thead><tbody>';
+  
+  Object.keys(db.eventos || {}).sort().forEach(fecha => {
+    db.eventos[fecha].forEach(e => {
+      html += `<tr>
+        <td>${fecha}</td>
+        <td>${e.titulo}</td>
+        <td>${e.descripcion || '-'}</td>
+        <td>${e.tipo}</td>
+      </tr>`;
+    });
+  });
+  
+  html += '</tbody></table>';
+  return html;
+}
+
+function generarTablaReunionesPDF() {
+  let html = '<table><thead><tr><th>Fecha</th><th>Tema</th><th>Participantes</th><th>Acuerdos</th></tr></thead><tbody>';
+  
+  (db.reuniones || []).forEach(r => {
+    html += `<tr>
+      <td>${r.fecha}</td>
+      <td>${r.tema}</td>
+      <td>${r.participantes}</td>
+      <td>${r.acuerdos}</td>
+    </tr>`;
+  });
+  
+  html += '</tbody></table>';
+  return html;
+}
+
+function contarRegistros(seccion) {
+  switch(seccion) {
+    case 'eventos':
+      let count = 0;
+      Object.values(db.eventos || {}).forEach(arr => count += arr.length);
+      return count;
+    case 'reuniones':
+      return (db.reuniones || []).length;
+    default:
+      return 0;
+  }
+}
+
+// Exportar sección a JSON (backup)
+function exportarSeccionJSON(seccion, nombreSeccion) {
+  let datos = null;
+  
+  switch(seccion) {
+    case 'eventos': datos = db.eventos; break;
+    case 'reuniones': datos = db.reuniones; break;
+    case 'comisiones': datos = db.comisiones; break;
+    case 'visitas': datos = db.visitas; break;
+    case 'permisos': datos = db.permisos; break;
+    case 'circulares': datos = db.circulares; break;
+    case 'actividades': datos = db.actividades; break;
+    case 'inventario': datos = db.inventario; break;
+    case 'asuntos': datos = db.asuntos; break;
+  }
+  
+  if(!datos) {
+    alert('No hay datos para exportar');
+    return;
+  }
+  
+  const json = JSON.stringify(datos, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `${seccion}_backup_${new Date().toISOString().split('T')[0]}.json`;
+  link.click();
+  
+  alert(`✅ Backup de ${nombreSeccion} descargado`);
+}
+
+let busquedaTimeout = null;
+
+function inicializarBusquedaGlobal() {
+  const inputBusqueda = document.getElementById('busquedaGlobal');
+  if(!inputBusqueda) return;
+  
+  inputBusqueda.addEventListener('input', function(e) {
+    clearTimeout(busquedaTimeout);
+    busquedaTimeout = setTimeout(() => {
+      realizarBusquedaGlobal(e.target.value);
+    }, 300); // Espera 300ms después de escribir
+  });
+  
+  // Click fuera cierra resultados
+  document.addEventListener('click', function(e) {
+    if(!e.target.closest('.busqueda-container')) {
+      cerrarResultadosBusqueda();
+    }
+  });
+}
+
+function realizarBusquedaGlobal(termino) {
+  termino = termino.trim().toLowerCase();
+  
+  if(termino.length < 3) {
+    cerrarResultadosBusqueda();
+    return;
+  }
+  
+  const resultados = {
+    eventos: buscarEnEventos(termino),
+    reuniones: buscarEnReuniones(termino),
+    comisiones: buscarEnComisiones(termino),
+    visitas: buscarEnVisitas(termino),
+    permisos: buscarEnPermisos(termino),
+    circulares: buscarEnCirculares(termino),
+    actividades: buscarEnActividades(termino),
+    inventario: buscarEnInventario(termino),
+    asuntos: buscarEnAsuntos(termino)
+  };
+  
+  mostrarResultadosBusqueda(resultados, termino);
+}
+
+function buscarEnEventos(termino) {
+  const resultados = [];
+  Object.keys(db.eventos || {}).forEach(fecha => {
+    db.eventos[fecha].forEach((evento, idx) => {
+      const textoCompleto = `${evento.titulo} ${evento.descripcion || ''}`.toLowerCase();
+      if(textoCompleto.includes(termino)) {
+        resultados.push({
+          fecha: fecha,
+          texto: evento.titulo,
+          detalle: evento.descripcion || '',
+          tipo: evento.tipo,
+          seccion: 'calendario',
+          idx: idx
+        });
+      }
+    });
+  });
+  return resultados;
+}
+
+function buscarEnReuniones(termino) {
+  return (db.reuniones || []).map((r, idx) => {
+    const textoCompleto = `${r.tema} ${r.participantes} ${r.acuerdos}`.toLowerCase();
+    if(textoCompleto.includes(termino)) {
+      return {
+        fecha: r.fecha,
+        texto: r.tema,
+        detalle: r.participantes,
+        seccion: 'reuniones',
+        idx: idx
+      };
+    }
+  }).filter(Boolean);
+}
+
+function buscarEnComisiones(termino) {
+  return (db.comisiones || []).map((c, idx) => {
+    const textoCompleto = `${c.nombre} ${c.integrantes} ${c.funciones}`.toLowerCase();
+    if(textoCompleto.includes(termino)) {
+      return {
+        texto: c.nombre,
+        detalle: c.integrantes,
+        seccion: 'comisiones',
+        idx: idx
+      };
+    }
+  }).filter(Boolean);
+}
+
+function buscarEnVisitas(termino) {
+  return (db.visitas || []).map((v, idx) => {
+    const textoCompleto = `${v.lugar} ${v.grado} ${v.responsables} ${v.observaciones}`.toLowerCase();
+    if(textoCompleto.includes(termino)) {
+      return {
+        fecha: v.fecha,
+        texto: v.lugar,
+        detalle: `${v.grado} - ${v.responsables}`,
+        seccion: 'visitas',
+        idx: idx
+      };
+    }
+  }).filter(Boolean);
+}
+
+function buscarEnPermisos(termino) {
+  return (db.permisos || []).map((p, idx) => {
+    const textoCompleto = `${p.tipo} ${p.motivo} ${p.observaciones}`.toLowerCase();
+    if(textoCompleto.includes(termino)) {
+      return {
+        fecha: p.fechaInicio,
+        texto: p.motivo,
+        detalle: p.tipo,
+        seccion: 'permisos',
+        idx: idx
+      };
+    }
+  }).filter(Boolean);
+}
+
+function buscarEnCirculares(termino) {
+  return (db.circulares || []).map((c, idx) => {
+    const textoCompleto = `${c.numero} ${c.asunto} ${c.destinatarios} ${c.contenido}`.toLowerCase();
+    if(textoCompleto.includes(termino)) {
+      return {
+        fecha: c.fecha,
+        texto: `${c.numero || ''} - ${c.asunto}`,
+        detalle: c.destinatarios,
+        seccion: 'circulares',
+        idx: idx
+      };
+    }
+  }).filter(Boolean);
+}
+
+function buscarEnActividades(termino) {
+  return (db.actividades || []).map((a, idx) => {
+    const textoCompleto = `${a.nombre} ${a.descripcion}`.toLowerCase();
+    if(textoCompleto.includes(termino)) {
+      return {
+        fecha: a.fecha,
+        texto: a.nombre,
+        detalle: a.descripcion,
+        seccion: 'actividades',
+        idx: idx
+      };
+    }
+  }).filter(Boolean);
+}
+
+function buscarEnInventario(termino) {
+  return (db.inventario || []).map((m, idx) => {
+    const textoCompleto = `${m.nombre} ${m.ubicacion} ${m.observaciones}`.toLowerCase();
+    if(textoCompleto.includes(termino)) {
+      return {
+        texto: m.nombre,
+        detalle: `${m.ubicacion} - ${m.estado}`,
+        seccion: 'inventario',
+        idx: idx
+      };
+    }
+  }).filter(Boolean);
+}
+
+function buscarEnAsuntos(termino) {
+  return (db.asuntos || []).map((a, idx) => {
+    const textoCompleto = `${a.titulo} ${a.descripcion}`.toLowerCase();
+    if(textoCompleto.includes(termino)) {
+      return {
+        fecha: a.fecha,
+        texto: a.titulo,
+        detalle: a.prioridad,
+        seccion: 'asuntos',
+        idx: idx
+      };
+    }
+  }).filter(Boolean);
+}
+
+function mostrarResultadosBusqueda(resultados, termino) {
+  const totalResultados = Object.values(resultados).reduce((sum, arr) => sum + arr.length, 0);
+  
+  if(totalResultados === 0) {
+    mostrarSinResultados(termino);
+    return;
+  }
+  
+  const nombres = {
+    eventos: '📅 Eventos',
+    reuniones: '🤝 Reuniones',
+    comisiones: '👥 Comisiones',
+    visitas: '🚗 Visitas',
+    permisos: '📋 Permisos',
+    circulares: '📄 Circulares',
+    actividades: '💰 Actividades',
+    inventario: '📦 Inventario',
+    asuntos: '📌 Asuntos'
+  };
+  
+  let html = `
+    <div class="resultados-busqueda" id="resultadosBusqueda">
+      <div class="resultados-header">
+        <strong>🔍 ${totalResultados} resultado${totalResultados !== 1 ? 's' : ''} encontrado${totalResultados !== 1 ? 's' : ''}</strong>
+        <button class="btn-cerrar-busqueda" onclick="cerrarResultadosBusqueda()">✖</button>
+      </div>
+      <div class="resultados-contenido">
+  `;
+  
+  Object.keys(resultados).forEach(categoria => {
+    if(resultados[categoria].length > 0) {
+      html += `
+        <div class="resultado-categoria">
+          <h4>${nombres[categoria]} (${resultados[categoria].length})</h4>
+          ${resultados[categoria].map(r => `
+            <div class="resultado-item" onclick="irAResultado('${r.seccion}', ${r.idx}, '${r.fecha || ''}')">
+              ${r.fecha ? `<span class="resultado-fecha">${formatearFechaEvento(r.fecha)}</span>` : ''}
+              <div class="resultado-texto">${resaltarTermino(r.texto, termino)}</div>
+              ${r.detalle ? `<div class="resultado-detalle">${resaltarTermino(r.detalle, termino)}</div>` : ''}
+              <button class="btn-ir-resultado">Ir →</button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+  });
+  
+  html += `</div></div>`;
+  
+  const existente = document.getElementById('resultadosBusqueda');
+  if(existente) existente.remove();
+  
+  document.querySelector('.busqueda-container').insertAdjacentHTML('beforeend', html);
+}
+
+function mostrarSinResultados(termino) {
+  const html = `
+    <div class="resultados-busqueda" id="resultadosBusqueda">
+      <div class="resultados-header">
+        <strong>🔍 Sin resultados</strong>
+        <button class="btn-cerrar-busqueda" onclick="cerrarResultadosBusqueda()">✖</button>
+      </div>
+      <div class="resultados-contenido">
+        <p style="text-align: center; color: #999; padding: 2rem;">
+          No se encontraron resultados para "<strong>${termino}</strong>"
+        </p>
+      </div>
+    </div>
+  `;
+  
+  const existente = document.getElementById('resultadosBusqueda');
+  if(existente) existente.remove();
+  
+  document.querySelector('.busqueda-container').insertAdjacentHTML('beforeend', html);
+}
+
+function resaltarTermino(texto, termino) {
+  const regex = new RegExp(`(${termino})`, 'gi');
+  return texto.replace(regex, '<mark>$1</mark>');
+}
+
+function irAResultado(seccion, idx, fecha) {
+  cerrarResultadosBusqueda();
+  
+  // Mapeo de secciones
+  const seccionesMap = {
+    'eventos': 'calendario',
+    'calendario': 'calendario',
+    'reuniones': 'reuniones',
+    'comisiones': 'comisiones',
+    'visitas': 'visitas',
+    'permisos': 'permisos',
+    'circulares': 'circulares',
+    'actividades': 'actividades',
+    'inventario': 'inventario',
+    'asuntos': 'asuntos'
+  };
+  
+  const seccionId = seccionesMap[seccion] || seccion;
+  
+  // Ocultar portada y bienvenida
+  const portada = document.getElementById('portada');
+  const bienvenida = document.getElementById('bienvenida');
+  const funcionalidades = document.getElementById('funcionalidades');
+  
+  if(portada) portada.classList.remove('active');
+  if(bienvenida) bienvenida.classList.remove('active');
+  if(funcionalidades) funcionalidades.classList.remove('active');
+  
+  // Mostrar header y nav
+  const mainHeader = document.getElementById('mainHeader');
+  const mainNav = document.getElementById('mainNav');
+  
+  if(mainHeader) mainHeader.style.display = 'block';
+  if(mainNav) mainNav.classList.add('visible');
+  
+  // Ocultar todas las secciones
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  
+  // Mostrar la sección deseada
+  const seccionElement = document.getElementById(seccionId);
+  if(seccionElement) {
+    seccionElement.classList.add('active');
+  }
+  
+  // Si es calendario Y tenemos fecha, abrir el modal del evento
+  if(seccionId === 'calendario' && fecha) {
+    setTimeout(() => {
+      // Regenerar calendario primero
+      if(typeof generarCalendario === 'function') {
+        generarCalendario();
+      }
+      
+      // Luego abrir el modal del evento
+      setTimeout(() => {
+        if(typeof abrirModalEvento === 'function') {
+          abrirModalEvento(fecha);
+        }
+      }, 300);
+    }, 200);
+  } else if(seccionId === 'calendario') {
+    // Si es calendario pero sin fecha, solo regenerar
+    setTimeout(() => {
+      if(typeof generarCalendario === 'function') {
+        generarCalendario();
+      }
+    }, 200);
+  }
+  
+  // Scroll al top
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 100);
+}
+
+function cerrarResultadosBusqueda() {
+  const resultados = document.getElementById('resultadosBusqueda');
+  if(resultados) resultados.remove();
+}
+    let reunionEditandoIdx = null, comisionEditandoIdx = null, visitaEditandoIdx = null;
+    let permisoEditandoIdx = null, circularEditandoIdx = null, actividadEditandoIdx = null;
+    let materialEditandoIdx = null, asuntoEditandoIdx = null;
+    
+    window.editarReunion = function(idx) {
+      const r = db.reuniones[idx]; if(!r) return;
+      reunionEditandoIdx = idx;
+      document.getElementById('fechaReunion').value = r.fecha;
+      document.getElementById('temaReunion').value = r.tema;
+      document.getElementById('participantesReunion').value = r.participantes;
+      document.getElementById('acuerdosReunion').value = r.acuerdos;
+      alert('✏️ Editando reunión'); window.scrollTo(0, 0);
+    };
+    window.editarComision = function(idx) {
+      const c = db.comisiones[idx]; if(!c) return;
+      comisionEditandoIdx = idx;
+      document.getElementById('nombreComision').value = c.nombre;
+      document.getElementById('integrantesComision').value = c.integrantes;
+      document.getElementById('funcionesComision').value = c.funciones;
+      alert('✏️ Editando comisión'); window.scrollTo(0, 0);
+    };
+    window.editarVisita = function(idx) {
+      const v = db.visitas[idx]; if(!v) return;
+      visitaEditandoIdx = idx;
+      document.getElementById('fechaVisita').value = v.fecha;
+      document.getElementById('lugarVisita').value = v.lugar;
+      document.getElementById('gradoVisita').value = v.grado;
+      document.getElementById('cantidadVisita').value = v.cantidad;
+      document.getElementById('responsablesVisita').value = v.responsables;
+      document.getElementById('observacionesVisita').value = v.observaciones;
+      alert('✏️ Editando visita'); window.scrollTo(0, 0);
+    };
+    window.editarPermiso = function(idx) {
+      const p = db.permisos[idx]; if(!p) return;
+      permisoEditandoIdx = idx;
+      document.getElementById('tipoPermiso').value = p.tipo;
+      document.getElementById('fechaInicioPermiso').value = p.fechaInicio;
+      document.getElementById('fechaFinPermiso').value = p.fechaFin;
+      document.getElementById('motivoPermiso').value = p.motivo;
+      document.getElementById('obsPermiso').value = p.observaciones;
+      alert('✏️ Editando permiso'); window.scrollTo(0, 0);
+    };
+    window.editarCircular = function(idx) {
+      const c = db.circulares[idx]; if(!c) return;
+      circularEditandoIdx = idx;
+      document.getElementById('fechaCircular').value = c.fecha;
+      document.getElementById('numeroCircular').value = c.numero;
+      document.getElementById('asuntoCircular').value = c.asunto;
+      document.getElementById('destinatariosCircular').value = c.destinatarios;
+      document.getElementById('contenidoCircular').value = c.contenido;
+      alert('✏️ Editando circular'); window.scrollTo(0, 0);
+    };
+    window.editarActividad = function(idx) {
+      const a = db.actividades[idx]; if(!a) return;
+      actividadEditandoIdx = idx;
+      document.getElementById('nombreActividad').value = a.nombre;
+      document.getElementById('fechaActividad').value = a.fecha;
+      document.getElementById('ingresosActividad').value = a.ingresos;
+      document.getElementById('egresosActividad').value = a.egresos;
+      document.getElementById('descActividad').value = a.descripcion;
+      alert('✏️ Editando actividad'); window.scrollTo(0, 0);
+    };
+    window.editarMaterial = function(idx) {
+      const m = db.inventario[idx]; if(!m) return;
+      materialEditandoIdx = idx;
+      document.getElementById('nombreMaterial').value = m.nombre;
+      document.getElementById('cantidadMaterial').value = m.cantidad;
+      document.getElementById('estadoMaterial').value = m.estado;
+      document.getElementById('ubicacionMaterial').value = m.ubicacion;
+      document.getElementById('obsMaterial').value = m.observaciones;
+      alert('✏️ Editando material'); window.scrollTo(0, 0);
+    };
+    window.editarAsunto = function(id) {
+      const a = db.asuntos.find(a => a.id === id); if(!a) return;
+      asuntoEditandoIdx = id;
+      document.getElementById('fechaAsunto').value = a.fecha;
+      document.getElementById('tituloAsunto').value = a.titulo;
+      document.getElementById('prioridadAsunto').value = a.prioridad;
+      document.getElementById('descAsunto').value = a.descripcion;
+      alert('✏️ Editando asunto'); window.scrollTo(0, 0);
+    };
+  </script>
+  <script>
+    // Mostrar/ocultar indicador según sección activa
+    (function() {
+      const hint = document.getElementById('scrollHint');
+      const observer = new MutationObserver(() => {
+        const activa = document.querySelector('section.active');
+        if (activa && activa.id === 'funcionalidades') {
+          hint.style.display = 'flex';
+        } else {
+          hint.style.display = 'none';
+        }
+      });
+      observer.observe(document.body, { subtree: true, attributeFilter: ['class'] });
+    })();
+  </script>
+
+  <!-- ==================== DASHBOARD - FUNCIONES ==================== -->
+  <script>
+  // Calcular KPIs del Dashboard
+  function calcularKPIs() {
+    // Total de estudiantes
+    let totalEstudiantes = 0;
+    Object.values(db.estudiantes || {}).forEach(grado => {
+      totalEstudiantes += grado.length;
+    });
+    document.getElementById('kpiEstudiantes').textContent = totalEstudiantes;
+    
+    // Asistencia de hoy
+    const hoy = new Date().toISOString().split('T')[0];
+    let presentes = 0, total = 0;
+    Object.keys(db.asistencia || {}).forEach(key => {
+      if(key.includes(hoy)) {
+        const estado = db.asistencia[key];
+        Object.values(estado).forEach(s => {
+          total++;
+          if(s === 'P') presentes++;
+        });
+      }
+    });
+    const porcentaje = total > 0 ? Math.round((presentes / total) * 100) : 0;
+    document.getElementById('kpiAsistenciaHoy').textContent = porcentaje + '%';
+    
+    // Eventos próximos (7 días)
+    const hoyDate = new Date();
+    const en7dias = new Date(hoyDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+    let eventosProximos = 0;
+    Object.keys(db.eventos || {}).forEach(fecha => {
+      const fechaEvento = new Date(fecha);
+      if(fechaEvento >= hoyDate && fechaEvento <= en7dias) {
+        eventosProximos += db.eventos[fecha].length;
+      }
+    });
+    document.getElementById('kpiEventosProximos').textContent = eventosProximos;
+    
+    // Balance económico
+    let ingresos = 0, egresos = 0;
+    (db.actividades || []).forEach(a => {
+      ingresos += parseFloat(a.ingresos) || 0;
+      egresos += parseFloat(a.egresos) || 0;
+    });
+    const balance = ingresos - egresos;
+    document.getElementById('kpiBalance').textContent = '$' + balance.toFixed(2);
+    
+    // Reuniones este mes
+    const mesActual = hoyDate.getMonth();
+    const anioActual = hoyDate.getFullYear();
+    const reunionesMes = (db.reuniones || []).filter(r => {
+      const fechaReunion = new Date(r.fecha);
+      return fechaReunion.getMonth() === mesActual && 
+             fechaReunion.getFullYear() === anioActual;
+    }).length;
+    document.getElementById('kpiReuniones').textContent = reunionesMes;
+    
+    // Materiales con stock bajo (cantidad < 5)
+    const materialesBajos = (db.inventario || []).filter(m => 
+      parseInt(m.cantidad) < 5
+    ).length;
+    const kpiMaterialesCard = document.getElementById('kpiMaterialesBajos');
+    kpiMaterialesCard.querySelector('.kpi-numero').textContent = materialesBajos;
+    if(materialesBajos > 0) {
+      kpiMaterialesCard.classList.add('alert');
+    } else {
+      kpiMaterialesCard.classList.remove('alert');
+    }
+    
+    // Asuntos pendientes (prioridad alta o media)
+    const asuntosPendientes = (db.asuntos || []).filter(a => 
+      a.prioridad === 'alta' || a.prioridad === 'media'
+    ).length;
+    document.getElementById('kpiAsuntos').textContent = asuntosPendientes;
+    
+    // Circulares este mes
+    const circularesMes = (db.circulares || []).filter(c => {
+      const fechaCircular = new Date(c.fecha);
+      return fechaCircular.getMonth() === mesActual && 
+             fechaCircular.getFullYear() === anioActual;
+    }).length;
+    document.getElementById('kpiCirculares').textContent = circularesMes;
+  }
+
+  // Generar gráfico de asistencia
+  let chartAsistenciaInstance = null;
+  function generarGraficoAsistencia() {
+    const canvas = document.getElementById('chartAsistencia');
+    if(!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Destruir gráfico anterior si existe
+    if(chartAsistenciaInstance) {
+      chartAsistenciaInstance.destroy();
+    }
+    
+    // Obtener últimos 30 días
+    const hoy = new Date();
+    const fechas = [];
+    const porcentajes = [];
+    
+    for(let i = 29; i >= 0; i--) {
+      const fecha = new Date(hoy.getTime() - i * 24 * 60 * 60 * 1000);
+      const fechaStr = fecha.toISOString().split('T')[0];
+      fechas.push(fecha.getDate() + '/' + (fecha.getMonth() + 1));
+      
+      // Calcular asistencia de ese día
+      let presentes = 0, total = 0;
+      Object.keys(db.asistencia || {}).forEach(key => {
+        if(key.includes(fechaStr)) {
+          const estado = db.asistencia[key];
+          Object.values(estado).forEach(s => {
+            total++;
+            if(s === 'P') presentes++;
+          });
+        }
+      });
+      
+      const porcentaje = total > 0 ? Math.round((presentes / total) * 100) : 0;
+      porcentajes.push(porcentaje);
+    }
+    
+    chartAsistenciaInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: fechas,
+        datasets: [{
+          label: 'Asistencia (%)',
+          data: porcentajes,
+          borderColor: '#667eea',
+          backgroundColor: 'rgba(102, 126, 234, 0.1)',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Renderizar próximos eventos
+  function renderizarProximosEventosDashboard() {
+    const container = document.getElementById('listaProximosEventosDashboard');
+    if(!container) return;
+    
+    const hoy = new Date();
+    const eventos = [];
+    
+    // Recopilar eventos futuros
+    Object.keys(db.eventos || {}).forEach(fecha => {
+      const fechaEvento = new Date(fecha);
+      if(fechaEvento >= hoy) {
+        db.eventos[fecha].forEach(e => {
+          eventos.push({
+            fecha: fecha,
+            fechaObj: fechaEvento,
+            titulo: e.titulo,
+            tipo: e.tipo
+          });
+        });
+      }
+    });
+    
+    // Ordenar por fecha y tomar solo 5
+    eventos.sort((a, b) => a.fechaObj - b.fechaObj);
+    const top5 = eventos.slice(0, 5);
+    
+    if(top5.length === 0) {
+      container.innerHTML = '<p class="sin-datos">No hay eventos próximos</p>';
+      return;
+    }
+    
+    let html = '<div class="eventos-dashboard-lista">';
+    top5.forEach(e => {
+      const diasFaltantes = Math.ceil((e.fechaObj - hoy) / (1000 * 60 * 60 * 24));
+      const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+      
+      html += `
+        <div class="evento-dashboard-item" onclick="mostrarSeccion('calendario', this)">
+          <div class="evento-dashboard-fecha">
+            <span class="evento-dashboard-dia">${e.fechaObj.getDate()}</span>
+            <span class="evento-dashboard-mes">${meses[e.fechaObj.getMonth()]}</span>
+          </div>
+          <div class="evento-dashboard-info">
+            <div class="evento-dashboard-titulo">${e.titulo}</div>
+            <div class="evento-dashboard-tiempo">
+              ${diasFaltantes === 0 ? 'Hoy' : 
+                diasFaltantes === 1 ? 'Mañana' : 
+                `En ${diasFaltantes} días`}
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    html += '</div>';
+    
+    container.innerHTML = html;
+  }
+
+  // Calcular balance económico
+  function calcularBalance() {
+    let ingresos = 0, egresos = 0;
+    
+    (db.actividades || []).forEach(a => {
+      ingresos += parseFloat(a.ingresos) || 0;
+      egresos += parseFloat(a.egresos) || 0;
+    });
+    
+    const balance = ingresos - egresos;
+    
+    document.getElementById('balanceIngresos').textContent = '$' + ingresos.toFixed(2);
+    document.getElementById('balanceEgresos').textContent = '$' + egresos.toFixed(2);
+    document.getElementById('balanceFinal').textContent = '$' + balance.toFixed(2);
+    
+    // Cambiar color según balance
+    const card = document.getElementById('balanceFinalCard');
+    if(balance >= 0) {
+      card.classList.remove('negativo');
+      card.classList.add('positivo');
+    } else {
+      card.classList.remove('positivo');
+      card.classList.add('negativo');
+    }
+  }
+
+  // Inicializar dashboard completo
+  function inicializarDashboard() {
+    calcularKPIs();
+    generarGraficoAsistencia();
+    renderizarProximosEventosDashboard();
+    calcularBalance();
+  }
+
+  // Hook para actualizar dashboard al cambiar de sección
+  const mostrarSeccionOriginal = window.mostrarSeccion;
+  window.mostrarSeccion = function(seccionId, boton, fecha) {
+    mostrarSeccionOriginal(seccionId, boton, fecha);
+    
+    // Si mostramos el dashboard, inicializarlo
+    if(seccionId === 'dashboard') {
+      setTimeout(() => {
+        inicializarDashboard();
+      }, 100);
+    }
+  };
+  </script>
+
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+    .then(function(registration) {
+      console.log('Service Worker registrado:', registration.scope);
+    })
+    .catch(function(error) {
+      console.log('Error al registrar Service Worker:', error);
+    });
+}
+  </script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('✅ SW registrado'))
+          .catch(err => console.log('❌ Error SW:', err));
+      });
+    }
+  </script>
+</body>
+</html>
